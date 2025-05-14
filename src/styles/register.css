@@ -1,0 +1,156 @@
+.register-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f9f9fb;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .register-form {
+    background-color: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+  }
+  
+  .register-form h3 {
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .register-form h3 span {
+    color: #e2183f;
+  }
+  
+  .register-form h2 {
+    font-size: 22px;
+    margin-top: 25px;
+    margin-bottom: 5px;
+    font-weight: 700;
+  }
+  
+  .register-form h6 {
+    font-size: 0.8rem;
+    color: #888;
+    margin: 10px 0px 30px 0;
+  }
+  .role-toggle {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .role-toggle button {
+    width: 48%;
+    padding: 10px 0;
+    border: 1px solid #eee;
+    background: #fff;
+    color: #333;
+    font-weight: 400;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .role-toggle .active {
+    background-color: #e2183f;
+    color: white;
+    font-weight: bold;
+    border: none;
+  }
+  .role-toggle button i {
+    margin-right: 6px;
+  }
+  
+  .name-fields {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .name-fields input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    min-width: 0; 
+  }
+  
+  .input-icon {
+    position: relative;
+    margin-bottom: 16px;
+  }
+  .input-icon input {
+    width: 100%;
+    padding: 12px ;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+  }
+  .input-icon i {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #aaa;
+  }
+  .input-icon .show-password {
+    left: auto;
+    right: 12px;
+    cursor: pointer;
+  }
+  
+  .checkbox-row {
+    text-align: left;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  .checkbox-row a {
+    color: #e2183f;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .btn-primary {
+    background-color: #e2183f;
+    color: #fff;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .divider {
+    margin: 10px 0;
+    color: #888;
+    font-size: 14px;
+  }
+  
+  .social-login {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .social-login button {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    background-color: #fff;
+    cursor: pointer;
+  }
+  
+  .login-footer {
+    font-size: 14px;
+  }
+  .login-footer a {
+    color: #e2183f;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  
