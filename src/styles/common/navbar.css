@@ -1,0 +1,63 @@
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 40px;
+    border-bottom: 2px dotted #eee;
+    background-color: white;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .logo-hat {
+    color: #e91e63; /* đỏ đậm */
+  }
+  
+  .logo-de {
+    color: #2c3e50; /* xám đậm */
+  }
+  
+  .nav-menu, .nav-button {
+    display: flex;
+    gap: 24px;
+    font-size: 16px;
+  }
+  .nav-button a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: 500;
+}
+  
+  .nav-menu a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #aaa;
+  }
+  
+  .search-bar input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 15px;
+    color: #aaa;
+  }
+  
+  .nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-size: 20px;
+    color: #2c3e50;
+  }
+  

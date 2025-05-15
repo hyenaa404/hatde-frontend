@@ -24,7 +24,7 @@
   font-weight: 700;
 }
 .login-form h3 span {
-  color: #e2183f;
+  color: #F43F5E;
 }
 
 .login-form h2 {
@@ -61,7 +61,7 @@
 }
 
 .form-group input:focus {
-  border-color: #e2183f;
+  border-color: #F43F5E;
 }
 
 .checkbox-row {
@@ -79,13 +79,13 @@
 }
 
 .checkbox-row a {
-  color: #e2183f;
+  color: #F43F5E;
   text-decoration: none;
   font-weight: 500;
 }
 
 .login-btn {
-  background-color: #e2183f;
+  background-color: #F43F5E;
   color: #fff;
   padding: 12px;
   width: 100%;
@@ -123,7 +123,7 @@
   font-size: 14px;
 }
 .login-footer a {
-  color: #e2183f;
+  color: #F43F5E;
   text-decoration: none;
   font-weight: 500;
 }

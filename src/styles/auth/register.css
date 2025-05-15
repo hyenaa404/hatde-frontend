@@ -8,6 +8,7 @@
   }
   
   .register-form {
+    margin: 30px 30px;
     background-color: #fff;
     padding: 40px 30px;
     border-radius: 12px;
@@ -22,7 +23,7 @@
     font-weight: 700;
   }
   .register-form h3 span {
-    color: #e2183f;
+    color: #F43F5E;
   }
   
   .register-form h2 {
@@ -41,19 +42,21 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    gap: 10px;
+    border-bottom: solid 0.5px #F43F5E;
   }
   .role-toggle button {
-    width: 48%;
+    flex: 1;
     padding: 10px 0;
-    border: 1px solid #eee;
+    border: none;
     background: #fff;
     color: #333;
     font-weight: 400;
-    border-radius: 8px;
+    border-radius: 8px 8px 0 0;
     cursor: pointer;
   }
   .role-toggle .active {
-    background-color: #e2183f;
+    background-color: #F43F5E;
     color: white;
     font-weight: bold;
     border: none;
@@ -69,7 +72,7 @@
   }
   .name-fields input {
     flex: 1;
-    padding: 12px;
+    padding:  12px 12px 12px 36px;
     border: 1px solid #ddd;
     border-radius: 8px;
     outline: none;
@@ -82,7 +85,7 @@
   }
   .input-icon input {
     width: 100%;
-    padding: 12px ;
+    padding:  12px 12px 12px 36px ;
     border: 1px solid #ddd;
     border-radius: 8px;
     outline: none;
@@ -106,13 +109,13 @@
     margin-bottom: 20px;
   }
   .checkbox-row a {
-    color: #e2183f;
+    color: #F43F5E;
     text-decoration: none;
     font-weight: 500;
   }
   
   .btn-primary {
-    background-color: #e2183f;
+    background-color: #F43F5E;
     color: #fff;
     padding: 12px;
     width: 100%;
@@ -149,8 +152,17 @@
     font-size: 14px;
   }
   .login-footer a {
-    color: #e2183f;
+    color: #F43F5E;
     font-weight: 500;
     text-decoration: none;
+  }
+  
+
+  .input-icon select {
+        width: 100%;
+    padding: 12px 12px 12px 36px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
   }
   

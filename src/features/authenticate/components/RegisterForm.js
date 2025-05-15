@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "../../../styles/register.css"
+import "../../../styles/auth/register.css"
 
 export default function RegisterForm() {
   const [role, setRole] = useState('user');
@@ -38,10 +38,36 @@ export default function RegisterForm() {
           <input type="email" placeholder="Địa chỉ Email" required />
         </div>
 
-        <div className="input-icon">
+           <div className="input-icon">
           <i className="fas fa-phone"></i>
           <input type="text" placeholder="Số điện thoại" required />
         </div>
+
+
+        {role === 'vendor' && (
+  <>
+    <div className="input-icon">
+      <i className="fas fa-building"></i>
+      <input type="text" placeholder="Tên doanh nghiệp" required />
+    </div>
+
+    <div className="input-icon">
+      <i className="fas fa-list"></i>
+      <select required>
+        <option value="">Loại doanh nghiệp</option>
+        <option value="catering">Dịch vụ tiệc</option>
+        <option value="photography">Chụp ảnh cưới</option>
+        <option value="decor">Trang trí tiệc</option>
+      </select>
+    </div>
+
+    <div className="input-icon">
+      <i className="fas fa-id-card"></i>
+      <input type="text" placeholder="Mã số doanh nghiệp" required />
+    </div>
+  </>
+)}
+
 
         <div className="input-icon">
           <i className="fas fa-lock"></i>

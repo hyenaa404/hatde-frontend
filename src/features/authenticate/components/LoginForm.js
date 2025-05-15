@@ -3,7 +3,7 @@ import { login } from "../authThunk";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import "../../../styles/login.css"
+import "../../../styles/auth/login.css"
 // import "themify-icons/themify-icons.css"
 
 export default function LoginForm() {

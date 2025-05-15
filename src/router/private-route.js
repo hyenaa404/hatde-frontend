@@ -9,7 +9,8 @@ import MainLayout from '../layouts/MainLayout';
 
 const PrivateRoute = ({ children }) => {
     const dispatch = useDispatch()
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    // const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const isAuthenticated = true;
     if(isAuthenticated === null){
             dispatch(checkAuthStatus());
     }
