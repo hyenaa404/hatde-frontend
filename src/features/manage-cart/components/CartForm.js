@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {cartData} from './example-data'
-import '../../../styles/cart/cart.css'
+import '../cart-styles/cart.css'
 
 const CartForm = () => {
   const [cartItems, setCartItems] = useState(cartData);

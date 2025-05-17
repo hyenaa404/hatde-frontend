@@ -27,7 +27,12 @@ export const loginAPI = (data) => {
 // }
 
 export const registerAPI = (data) => {
-    return axiosInstance.post('/register', data)
+    return axiosInstance.post('/register',{
+    email: data.email,
+    password: data.password
+  }, {
+    withCredentials: true
+  })
 }
 
 export const logoutAPI = () => {

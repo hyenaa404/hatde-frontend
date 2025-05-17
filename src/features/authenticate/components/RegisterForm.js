@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "../../../styles/auth/register.css"
+import "../auth-style/register.css"
 
 export default function RegisterForm() {
   const [role, setRole] = useState('user');

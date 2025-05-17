@@ -9,6 +9,11 @@ import PrivateRoute from './private-route';
 import MainLayout from '../layouts/MainLayout';
 import Logout from '../features/authenticate/pages/Logout';
 import CartForm from '../features/manage-cart/components/CartForm';
+import UserProfile from '../features/authenticate/pages/UserProfile';
+import Stores from '../pages/Stores';
+import Services from '../pages/Services';
+import Decors from '../pages/Decors';
+import BookingForm from '../features/booking/components/BookingForm';
 
 // export const router = createBrowserRouter([
 //   {
@@ -31,7 +36,9 @@ export const router = createBrowserRouter([
       { index: true, element: <LandingPage /> },
       { path: 'register', element: <RegisterForm /> },
       { path: 'login', element: <LoginForm /> },
-      { path: 'cart', element: <CartForm /> }
+      { path: 'stores', element: <Stores /> },
+      { path: 'services', element: <Services /> },
+      { path: 'decors', element: <Decors /> }
     ]
   },
   {
@@ -39,7 +46,10 @@ export const router = createBrowserRouter([
     element: <PrivateRoute><MainLayout /></PrivateRoute>,
     children: [
       { path: 'setting', element: <Setting /> },
-      { path: 'logout', element: <Logout /> }
+      { path: 'booking', element: <BookingForm /> },
+      { path: 'logout', element: <Logout /> },
+      { path: 'profile', element: <UserProfile /> },
+      { path: 'cart', element: <CartForm /> },
       
       
     ]

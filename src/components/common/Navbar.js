@@ -11,10 +11,10 @@ export const LandingNavbar = () => {
       </div>
 
       <nav className="nav-menu">
-        <a href="#">Trang chủ</a>
-        <a href="#">Cửa hàng</a>
-        <a href="#">Dịch vụ</a>
-        <a href="#">Phụ kiện trang trí</a>
+        <a href="./">Trang chủ</a>
+        <a href="./stores">Cửa hàng</a>
+        <a href="./services">Dịch vụ</a>
+        <a href="./decors">Phụ kiện trang trí</a>
       </nav>
 
       <div className="search-bar">
@@ -40,11 +40,12 @@ export const LandingNavbar = () => {
         </div>
   
         <nav className="nav-menu">
-          <a href="#">Trang chủ</a>
-          <a href="#">Cửa hàng</a>
-          <a href="#">Dịch vụ</a>
-          <a href="#">Phụ kiện trang trí</a>
-        </nav>
+        <a href="./">Trang chủ</a>
+        <a href="./stores">Cửa hàng</a>
+        <a href="./services">Dịch vụ</a>
+        <a href="./decors">Phụ kiện trang trí</a>
+      </nav>
+
   
         <div className="search-bar">
           <i className="fas fa-search"></i>
@@ -52,9 +53,9 @@ export const LandingNavbar = () => {
         </div>
   
         <div className="nav-icons">
-          <i className="far fa-heart"></i>
-          <i className="fas fa-shopping-cart"></i>
-          <i className="fas fa-user"></i>
+          <a href="#"><i className="far fa-heart"></i></a>
+          <a href="./cart"><i className="fas fa-shopping-cart"></i></a>
+          <a href="./profile"><i className="fas fa-user"></i></a>
         </div>
       </header>
     );
