@@ -1,14 +1,24 @@
 import React from 'react';
 import '../auth-style/profile.css';
+import { useSelector, useDispatch } from 'react-redux';
 
-const userData = {
-    name: "Nguyen Van A",
-    email: "nguyenvana@example.com",
-    address: "123 Nguyen Hue, District 1, Ho Chi Minh City, Vietnam",
-    phone: "+84 123 456 789",
-};
+// const user = {
+//     name: "Nguyen Van A",
+//     email: "nguyenvana@example.com",
+//     address: "123 Nguyen Hue, District 1, Ho Chi Minh City, Vietnam",
+//     phone: "+84 123 456 789",
+// };
+// const a = {
+//     fullname: 'Lê Văn Chính', 
+//     email: 'levanchinh2422003@gmail.com', 
+//     phone: '0123456789', 
+//     address: 'Xuân Thủy, Lệ Thủy, Quảng Bình', 
+//     role: 'vendor'
+// }
 
 const UserProfile = () => {
+    const dispatch = useDispatch()
+    const user = useSelector((state) => state.auth.user);
     return (
         <div className="container py-4">
             <div className="row shadow rounded bg-white">
@@ -22,8 +32,8 @@ const UserProfile = () => {
                             <i className="bi bi-person-circle" style={{ fontSize: '64px', color: '#6c757d' }}></i>
                         </div>
 
-                        <h6 className="mt-2">{userData.name}</h6>
-                        <p className="text-muted small">{userData.email}</p>
+                        <h6 className="mt-2">{user.fullname}</h6>
+                        <p className="text-muted small">{user.email}</p>
                     </div>
 
                     <ul className="list-unstyled">
@@ -53,9 +63,11 @@ const UserProfile = () => {
                             </button>
                         </li>
                         <li className="mt-4">
+                            <a href='./logout'>
                             <button className="btn btn-link text-danger w-100 text-start">
                                 <i className="bi bi-box-arrow-right me-2"></i> Đăng xuất
                             </button>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -68,7 +80,7 @@ const UserProfile = () => {
                         <i className="bi bi-house-door me-3 fs-5 text-secondary"></i>
                         <div>
                             <strong>Địa chỉ</strong>
-                            <div>{userData.address}</div>
+                            <div>{user.address}</div>
                         </div>
                     </div>
 
@@ -76,7 +88,7 @@ const UserProfile = () => {
                         <i className="bi bi-telephone me-3 fs-5 text-secondary"></i>
                         <div>
                             <strong>Số điện thoại</strong>
-                            <div>{userData.phone}</div>
+                            <div>{user.phone}</div>
                         </div>
                     </div>
 
@@ -84,7 +96,7 @@ const UserProfile = () => {
                         <i className="bi bi-envelope me-3 fs-5 text-secondary"></i>
                         <div>
                             <strong>Email</strong>
-                            <div>{userData.email}</div>
+                            <div>{user.email}</div>
                         </div>
                     </div>
 

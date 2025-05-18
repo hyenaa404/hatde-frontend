@@ -9,7 +9,7 @@ export const authenticateAPI = () => {
 }
 
 export const loginAPI = (data) => {
-  return axiosInstance.post('/login',{
+  return axiosInstance.post('/Auth/login',{
     email: data.email,
     password: data.password
   }, {
@@ -27,9 +27,16 @@ export const loginAPI = (data) => {
 // }
 
 export const registerAPI = (data) => {
-    return axiosInstance.post('/register',{
-    email: data.email,
-    password: data.password
+    return axiosInstance.post('/Auth/register',{
+      fullname: data.fullname,
+      email: data.email,
+      password: data.password,
+      phone: data.password,
+      address: data.address,
+      role: data.role,
+      businessName: data.businessName,
+      description: data.description,
+      mst: data.mst
   }, {
     withCredentials: true
   })

@@ -1,13 +1,15 @@
 
 import React from 'react';
 import {Link, Outlet } from 'react-router-dom';
-import {LandingNavbar} from '../components/common/Navbar';
+import {HomeNavbar, LandingNavbar} from '../components/common/Navbar';
 import Footer from '../components/common/Footer';
+import { useSelector, useDispatch } from 'react-redux';
 
 const LandingLayout = () => {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   return (
     <div>
-      <LandingNavbar />
+      {isAuthenticated? <HomeNavbar/>:<LandingNavbar />}
       <main className="main-content">
         <Outlet />
       </main>

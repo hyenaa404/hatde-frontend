@@ -9,13 +9,13 @@ import MainLayout from '../layouts/MainLayout';
 
 const PrivateRoute = ({ children }) => {
     const dispatch = useDispatch()
-    // const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    const isAuthenticated = true;
-    if(isAuthenticated === null){
-            dispatch(checkAuthStatus());
-    }
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    // if(isAuthenticated === null){
+    //         dispatch(checkAuthStatus());
+    // }
 
-    if (isAuthenticated === false) {
+    if (!isAuthenticated) {
+        console.log(isAuthenticated)
         return <Navigate to="/login" replace />;
     }
         return children;

@@ -11,6 +11,7 @@ export default function LoginForm() {
     const user = useSelector((state) => state.auth.user);
     const status = useSelector((state) => state.auth.status);
     const error = useSelector((state) => state.auth.error)
+    const auth = useSelector((state) => state.auth.isAuthenticated);
     const [submitted, setSubmitted] = useState(false)
     const navigate = useNavigate();
 
@@ -23,19 +24,19 @@ export default function LoginForm() {
         setSubmitted("true")
     };
 
-    // useEffect(() => {
-    //     if (!submitted) return;
-    //     console.log("status: " + status)
-    //     if (status === "succeeded") {
-    //         console.log(user)
-    //         navigate("/home")
-    //     } else if (status === "failed") {
-    //         console.log(error)
-    //         if (error === 401) alert("Wrong login information");
-    //         else if (error === 404) alert("Account does not exist");
-    //         else alert("Error happened");
-    //     }
-    // }, [status]);
+    useEffect(() => {
+        if (!submitted) return;
+        console.log("status: " + status)
+        if (status === "succeeded") {
+          
+            navigate("/")
+        } else if (status === "failed") {
+            console.log(error)
+            if (error === 401) alert("Wrong login information");
+            else if (error === 404) alert("Account does not exist");
+            else alert("Error happened");
+        }
+    }, [status]);
 
     return (
       <div className="login-wrapper">
@@ -76,7 +77,9 @@ export default function LoginForm() {
             <a href="#">Quên mật khẩu?</a>
           </div>
     
-          <button type="submit" className=" login-btn">Đăng nhập</button>
+          <button type="submit" className=" login-btn"
+          onSubmit={()=> handleLogin}
+          >Đăng nhập</button>
     
           <div className="divider">Hoặc tiếp tục với</div>
     

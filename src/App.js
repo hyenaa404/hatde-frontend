@@ -6,12 +6,12 @@ import { checkAuthStatus } from "./features/authenticate/authThunk";
 function App() {
     const dispatch = useDispatch();
     // const authStatus = useSelector((state) => state.auth.isAuthenticated)
-    const authStatus = true;
-    useEffect(()=> {
-        if(authStatus === null){
-        dispatch(checkAuthStatus());
-    }
-    }, [])
+    // const authStatus = true;
+    // useEffect(()=> {
+    //     if(authStatus === null){
+    //     dispatch(checkAuthStatus());
+    // }
+    // }, [])
     
     return (
         
