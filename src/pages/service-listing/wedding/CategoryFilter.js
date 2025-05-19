@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { categories } from './filterdata';
-import '../../styles/common/category-filter.css'
+import '../../../styles/common/category-filter.css'
 
 function CategoryFilter() {
   const [active, setActive] = useState('All');

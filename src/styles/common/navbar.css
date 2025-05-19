@@ -28,7 +28,7 @@
   
   .nav-menu, .nav-button {
     display: flex;
-    gap: 24px;
+    gap: 40px;
     font-size: 16px;
   }
   .nav-button a {

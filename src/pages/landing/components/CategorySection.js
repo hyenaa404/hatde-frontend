@@ -1,6 +1,6 @@
 import { categories } from "./example-landing-data";
 import { Container, Row, Col, Card, Button } from "react-bootstrap"
-import "../../styles/landing/category-section.css"
+import "../styles/category-section.css"
 
 const CategorySection = () => {
   return (

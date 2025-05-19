@@ -1,4 +1,4 @@
-import "../../styles/landing/hero-section.css"
+import "../styles/hero-section.css"
 const HeroSection = () => {
   return (
     <section className="hero-section">

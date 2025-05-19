@@ -1,18 +1,31 @@
-import Sidebar from "../components/services/SideBar";
-import ServiceCard from "../components/services/ServiceCard";
-import "../styles/stores.css"
-import { services } from "./example-data"
-import CategoryFilter from "../components/services/CategoryFilter";
-import Pagination from "../components/common/Pagination";
-import { useState } from "react";
+import Sidebar from "./wedding/SideBar";
+import WeddingCard from "./wedding/WeddingCard";
+import "./styles/services.css"
+import { getWeddingServices } from "../data/data"
+import CategoryFilter from "./wedding/CategoryFilter";
+import Pagination from "../../components/common/Pagination";
+import  { useState, useEffect } from "react";
 
-function Services() {
-  const itemsPerPage = 12;
+function WeddingServices() {
+  
+  const [weddingServices, setWeddingServices] = useState([]);
+
+  useEffect(() => {
+  const fetchData = async () => {
+      const weddingServices = await getWeddingServices();
+      setWeddingServices(weddingServices); 
+  };
+
+  fetchData();
+}, []);
+
+  const itemsPerPage = 6;
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.ceil(services.length / itemsPerPage);
+  const totalPages = Math.ceil(weddingServices.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = services.slice(startIndex, startIndex + itemsPerPage);
+  const currentItems = weddingServices.slice(startIndex, startIndex + itemsPerPage);
+
   return (
     <>
       <div className="header-section">
@@ -29,7 +42,7 @@ function Services() {
           </div>
           <div className="store-grid">
             {currentItems.map(service => (
-              <ServiceCard key={service.id} service={service} />
+              <WeddingCard key={service.id} service={service} />
             ))}
           </div>
           <Pagination
@@ -43,4 +56,4 @@ function Services() {
   );
 }
 
-export default Services;
+export default WeddingServices;

@@ -1,4 +1,4 @@
-import "../../styles/landing/about-section.css"
+import "../styles/about-section.css"
 const AboutSection = () => {
   const steps = [
     {

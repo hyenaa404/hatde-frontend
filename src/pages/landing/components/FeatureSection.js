@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Card, Badge } from 'react-bootstrap';
 import { features } from './example-landing-data';
-import "../../styles/landing/feature-section.css"
+import "../styles/feature-section.css"
 
 
 const FeatureSection = () => {

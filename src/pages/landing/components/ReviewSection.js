@@ -1,4 +1,4 @@
-import "../../styles/landing/review-section.css"
+import "../styles/review-section.css"
 import { reviews } from './example-landing-data';
 
 

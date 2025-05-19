@@ -1,17 +1,29 @@
-import { useState } from "react";
-import DecorCard from "../components/decors/DecorCard";
-import "../styles/stores.css"
-import { decorItems } from "./example-data"
-import SearchBar from "../components/decors/SearchBar";
-import Pagination from "../components/common/Pagination";
+import { useState, useEffect } from "react";
+import AccessoryCard from "./accessories/AccessoryCard";
+import "./styles/services.css"
+import { getAccessoryServices } from "../data/data"
+import SearchBar from "./accessories/SearchBar";
+import Pagination from "../../components/common/Pagination";
 
-function Decors() {
+function AccessoryServices() {
+
+  const [accessoryService, setAccessoryServices] = useState([]);
+
+  useEffect(() => {
+  const fetchData = async () => {
+      const weddingServices = await getAccessoryServices();
+      setAccessoryServices(weddingServices); 
+  };
+
+  fetchData();
+}, []);
+
   const itemsPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.ceil(decorItems.length / itemsPerPage);
+  const totalPages = Math.ceil(accessoryService.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = decorItems.slice(startIndex, startIndex + itemsPerPage);
+  const currentItems = accessoryService.slice(startIndex, startIndex + itemsPerPage);
   return (
     <>
       <div className="header-section">
@@ -26,7 +38,7 @@ function Decors() {
           </div>
           <div className="store-grid">
             {currentItems.map(item => (
-              <DecorCard key={item.id} item={item} />
+              <AccessoryCard key={item.id} item={item} />
             ))}
           </div>
           <Pagination
@@ -40,4 +52,4 @@ function Decors() {
   );
 }
 
-export default Decors;
+export default AccessoryServices;

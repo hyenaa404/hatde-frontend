@@ -3,17 +3,17 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import LandingLayout from '../layouts/LandingLayout';
 import Setting from '../pages/Setting';
 import LoginForm from '../features/authenticate/components/LoginForm';
-import LandingPage from '../pages/LandingPage';
+import LandingPage from '../pages/landing/LandingPage';
 import RegisterForm from '../features/authenticate/components/RegisterForm';
 import PrivateRoute from './private-route';
 import MainLayout from '../layouts/MainLayout';
 import Logout from '../features/authenticate/pages/Logout';
 import CartForm from '../features/manage-cart/components/CartForm';
 import UserProfile from '../features/authenticate/pages/UserProfile';
-import Stores from '../pages/Stores';
-import Services from '../pages/Services';
-import Decors from '../pages/Decors';
 import BookingForm from '../features/booking/components/BookingForm';
+import AccessoryServices from '../pages/service-listing/AccessoryServices';
+import WeddingServices from '../pages/service-listing/WeddingServices';
+import ServiceDetail from '../pages/service-listing/ServiceDetail';
 
 // export const router = createBrowserRouter([
 //   {
@@ -36,9 +36,9 @@ export const router = createBrowserRouter([
       { index: true, element: <LandingPage /> },
       { path: 'register', element: <RegisterForm /> },
       { path: 'login', element: <LoginForm /> },
-      { path: 'stores', element: <Stores /> },
-      { path: 'services', element: <Services /> },
-      { path: 'decors', element: <Decors /> }
+      { path: 'wedding', element: <WeddingServices/> },
+      { path: 'accessory', element: <AccessoryServices/> },
+      { path: 'service-detail/:id', element: <ServiceDetail/> }
     ]
   },
   {
