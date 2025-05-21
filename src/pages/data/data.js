@@ -13,7 +13,6 @@ export const getWeddingServices = async () => {
 
 export const getServiceById = async (id) => {
   try {
-    console.log(id)
     const response = await getServiceByIdAPI(id);
     console.log(response.data)
     return response.data;

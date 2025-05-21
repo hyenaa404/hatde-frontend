@@ -13,11 +13,13 @@ const cartSlice = createSlice({
   const existingItem = state.items.find(item => item.serviceId === newItem.serviceId);
 
   if (existingItem) {
-    existingItem.quantity += 1;
-    state.totalQuantity += 1;
-    state.totalPrice += newItem.price;
+    // existingItem.quantity += 1;
+    // state.totalQuantity += 1;
+    // state.totalPrice += newItem.price;
+    return;
+
   } else {
-    state.items.push({ ...newItem, quantity: 1 }); // 👈 đảm bảo có quantity
+    state.items.push({ ...newItem }); 
     state.totalQuantity += 1;
     state.totalPrice += newItem.price;
   }
@@ -36,16 +38,16 @@ console.log("ID to remove:", id);
       state.items = state.items.filter(item => item.serviceId  !== id);
     },
 
-    updateQuantity: (state, action) => {
-  const { id, quantity } = action.payload;
-  const item = state.items.find(item => item.serviceId === id);
-  if (item && typeof item.quantity === 'number' && quantity > 0) {
-    const diff = quantity - item.quantity;
-    item.quantity = quantity;
-    state.totalQuantity += diff;
-    state.totalPrice += diff * item.price;
-  }
-},
+//     updateQuantity: (state, action) => {
+//   const { id, quantity } = action.payload;
+//   const item = state.items.find(item => item.serviceId === id);
+//   if (item && typeof item.quantity === 'number' && quantity > 0) {
+//     const diff = quantity - item.quantity;
+//     item.quantity = quantity;
+//     state.totalQuantity += diff;
+//     state.totalPrice += diff * item.price;
+//   }
+// },
 
     clearCart: (state) => {
       state.items = [];

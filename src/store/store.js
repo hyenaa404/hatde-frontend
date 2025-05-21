@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "../features/authenticate/authSlice"
 import cartReducer from "../features/manage-cart/cartSlice"
+import bookingReducer from "../features/booking/bookingSlice"
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import { combineReducers } from 'redux';
@@ -9,11 +10,15 @@ import { combineReducers } from 'redux';
 const persistConfig = {
   key: 'root',
   storage,
+  whitelist: ['auth', 'cart'] ,
+  
+  // blacklist: ['booking']
 };
 
 const rootReducer = combineReducers({
   auth: authReducer,
   cart: cartReducer,
+  booking: bookingReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

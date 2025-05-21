@@ -19,6 +19,7 @@ import { useSelector, useDispatch } from 'react-redux';
 const UserProfile = () => {
     const dispatch = useDispatch()
     const user = useSelector((state) => state.auth.user);
+    console.log(user)
     return (
         <div className="container py-4">
             <div className="row shadow rounded bg-white">
