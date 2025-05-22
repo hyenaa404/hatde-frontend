@@ -40,9 +40,7 @@ const BookingForm = () => {
         fetch("https://provinces.open-api.vn/api/?depth=1")
             .then(res => res.json())
             .then(data => setProvinces(data));
-        console.log(orderItems)
     }, []);
-
 
     const handleCityChange = async (e) => {
         const selectedCityCode = e.target.value;
@@ -66,20 +64,20 @@ const BookingForm = () => {
     };
 
 
-    // const orderItems = [
-    //     { name: 'Bộ thiệp mời đám cưới (KL:300c)', price: 1000000 },
-    //     { name: 'Mạng che mặt cô dâu - Ren ngà (Combo 2)', price: 350000 }
-    // ];
-
-
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const fullAddress = [form.address, form.ward, form.district, form.city]
-            .filter(Boolean)
-            .join(', ');
+        const selectedCity = provinces.find(p => p.code === Number(form.city));
+        const selectedDistrict = districts.find(d => d.code === Number(form.district));
+        const selectedWard = wards.find(w => w.code === Number(form.ward));
+
+        const fullAddress = [
+            form.address,
+            selectedWard?.name,
+            selectedDistrict?.name,
+            selectedCity?.name
+        ].filter(Boolean).join(', ');
 
         dispatch(setBookingInfo({
             name: form.name,
@@ -101,7 +99,6 @@ const BookingForm = () => {
         setSubmitted("true")
 
 
-        dispatch(clearCart())
 
 
     };
@@ -111,11 +108,14 @@ const BookingForm = () => {
     }, []);
 
     useEffect(() => {
-        console.log("sau khi cập nhật: ", bookingData)
+
+        console.log(bookingData);
         if (submitted === "true") {
             addBooking(bookingData);
 
             alert('Đặt hàng thành công!');
+
+            dispatch(clearCart())
 
             navigate("/");
         }

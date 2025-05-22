@@ -10,10 +10,12 @@ import MainLayout from '../layouts/MainLayout';
 import Logout from '../features/authenticate/pages/Logout';
 import CartForm from '../features/manage-cart/components/CartForm';
 import UserProfile from '../features/authenticate/pages/UserProfile';
-import BookingForm from '../features/booking/components/BookingForm';
+import BookingForm from '../features/booking/pages/BookingForm';
 import AccessoryServices from '../pages/service-listing/AccessoryServices';
 import WeddingServices from '../pages/service-listing/WeddingServices';
 import ServiceDetail from '../pages/service-listing/ServiceDetail';
+import BookingHistory from '../features/booking/pages/BookingHistory';
+import PaymentPage from '../features/booking/pages/PaymentPage';
 
 // export const router = createBrowserRouter([
 //   {
@@ -50,6 +52,8 @@ export const router = createBrowserRouter([
       { path: 'logout', element: <Logout /> },
       { path: 'profile', element: <UserProfile /> },
       { path: 'cart', element: <CartForm /> },
+      { path: 'booking-history', element: <BookingHistory /> },
+      { path: 'payment', element: <PaymentPage /> },
       
       
     ]

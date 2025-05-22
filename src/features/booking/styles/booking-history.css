@@ -1,0 +1,52 @@
+.booking-history {
+  padding: 30px;
+  max-width: 1000px;
+  margin: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.booking-history h2 {
+  text-align: center;
+  color: #F43F5E;
+  margin-bottom: 30px;
+}
+
+.booking-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.booking-table th, .booking-table td {
+    padding: 12px 10px;
+    text-align: left;
+    border: 1px solid #b7b0b0;
+}
+
+.booking-table th {
+  background-color: #F43F5E;
+  color: #fff;
+  font-weight: 600;
+}
+
+.booking-table tr:hover {
+  background-color: #fef2f2;
+}
+
+.pay-button {
+  background-color: #F43F5E;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 120px;
+}
+
+.pay-button:hover {
+  background-color: #e11d48;
+}
