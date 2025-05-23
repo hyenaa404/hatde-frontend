@@ -44,9 +44,11 @@ const UserProfile = () => {
                             </button>
                         </li>
                         <li className="mb-3">
+                            <a href = "./booking-history">
                             <button className="btn btn-light w-100 text-start">
                                 <i className="bi bi-clock-history me-2"></i> Lịch sử đặt hàng
                             </button>
+                            </a>
                         </li>
                         <li className="mb-3">
                             <button className="btn btn-light w-100 text-start">
