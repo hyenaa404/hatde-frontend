@@ -5,7 +5,7 @@ import Setting from '../pages/Setting';
 import LoginForm from '../features/authenticate/components/LoginForm';
 import LandingPage from '../pages/landing/LandingPage';
 import RegisterForm from '../features/authenticate/components/RegisterForm';
-import PrivateRoute from './private-route';
+import PrivateRoute, { PrivateAdminRoute, PrivateVendorRoute } from './private-route';
 import MainLayout from '../layouts/MainLayout';
 import Logout from '../features/authenticate/pages/Logout';
 import CartForm from '../features/manage-cart/components/CartForm';
@@ -16,6 +16,10 @@ import WeddingServices from '../pages/service-listing/WeddingServices';
 import ServiceDetail from '../pages/service-listing/ServiceDetail';
 import BookingHistory from '../features/booking/pages/BookingHistory';
 import PaymentPage from '../features/booking/pages/PaymentPage';
+import History from '../features/booking/pages/History';
+import VendorDashboard from '../pages/dashboard/VendorDashboard';
+import VendorDashboardLayout, { AdminDashboardLayout } from '../layouts/DashboardLayout.';
+import AdminDashboard from '../pages/dashboard/AdminDashboard';
 
 // export const router = createBrowserRouter([
 //   {
@@ -54,7 +58,29 @@ export const router = createBrowserRouter([
       { path: 'cart', element: <CartForm /> },
       { path: 'booking-history', element: <BookingHistory /> },
       { path: 'payment', element: <PaymentPage /> },
+      { path: 'test', element: <History /> },
       
+      
+      
+    ]
+  },
+  {
+    path: '/',
+    element: <PrivateVendorRoute><VendorDashboardLayout /></PrivateVendorRoute>,
+    children: [
+      
+      
+      { path: 'vendor-dashboard', element: <VendorDashboard /> },
+      
+    ]
+  },
+  {
+    path: '/',
+    element: <PrivateAdminRoute><AdminDashboardLayout /></PrivateAdminRoute>,
+    children: [
+      
+      
+      { path: 'admin-dashboard', element: <AdminDashboard /> },
       
     ]
   }

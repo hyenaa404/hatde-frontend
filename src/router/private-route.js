@@ -7,17 +7,45 @@ import { checkAuthStatus } from '../features/authenticate/authThunk';
 import route from './landing-router';
 import MainLayout from '../layouts/MainLayout';
 
-const PrivateRoute = ({ children }) => {
+export const PrivateRoute = ({ children }) => {
     const dispatch = useDispatch()
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    // if(isAuthenticated === null){
-    //         dispatch(checkAuthStatus());
-    // }
+  
 
     if (!isAuthenticated) {
         console.log(isAuthenticated)
         return <Navigate to="/login" replace />;
     }
+        return children;
+    
+
+};
+
+export const PrivateVendorRoute = ({ children }) => {
+    const dispatch = useDispatch()
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const user = useSelector((state)=> state.auth.user);
+  
+
+    // if (!isAuthenticated || user.role != "vendor") {
+    //     return <Navigate to="/home" replace />;
+    // }
+
+        return children;
+    
+
+};
+
+export const PrivateAdminRoute = ({ children }) => {
+    const dispatch = useDispatch()
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const user = useSelector((state)=> state.auth.user);
+  
+
+    // if (!isAuthenticated || user.role != "admin") {
+    //     return <Navigate to="/home" replace />;
+    // }
+
         return children;
     
 
