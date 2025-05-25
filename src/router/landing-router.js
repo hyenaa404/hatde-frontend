@@ -17,9 +17,12 @@ import ServiceDetail from '../pages/service-listing/ServiceDetail';
 import BookingHistory from '../features/booking/pages/BookingHistory';
 import PaymentPage from '../features/booking/pages/PaymentPage';
 import History from '../features/booking/pages/History';
-import VendorDashboard from '../pages/dashboard/VendorDashboard';
+import VendorDashboard from '../features/vendor/pages/VendorDashboard';
 import VendorDashboardLayout, { AdminDashboardLayout } from '../layouts/DashboardLayout.';
-import AdminDashboard from '../pages/dashboard/AdminDashboard';
+import AdminDashboard from '../features/admin/AdminDashboard';
+import { BookingManage } from '../features/admin/manage-booking/BookingManage';
+import ViewBooking from '../features/vendor/manage-booking/BookingManage';
+import ManageServices from '../features/vendor/manage-service/ManageServices';
 
 // export const router = createBrowserRouter([
 //   {
@@ -70,7 +73,9 @@ export const router = createBrowserRouter([
     children: [
       
       
-      { path: 'vendor-dashboard', element: <VendorDashboard /> },
+      { path: 'vendor/dashboard', element: <VendorDashboard /> },
+      { path: 'vendor/bookings', element: <ViewBooking /> },
+      { path: 'vendor/services', element: <ManageServices /> },
       
     ]
   },
@@ -80,7 +85,8 @@ export const router = createBrowserRouter([
     children: [
       
       
-      { path: 'admin-dashboard', element: <AdminDashboard /> },
+      { path: 'admin/dashboard', element: <AdminDashboard /> },
+      { path: 'admin/bookings', element: <BookingManage /> },
       
     ]
   }
