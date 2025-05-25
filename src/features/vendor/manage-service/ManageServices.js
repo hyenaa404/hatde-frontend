@@ -2,15 +2,18 @@ import React, { useEffect, useState } from 'react';
 import './ManageServices.css';
 import axiosInstance from '../../../services/axiosInstance';
 import Pagination from '../../../components/common/Pagination';
+import ServiceCard from './ServiceCard';
+import { fetchServiceAPI } from './serviceAPI';
+import ModalAddService from './ModalAddService';
+import {FaPlus } from "react-icons/fa";
 
 const ManageServices = () => {
     const [services, setServices] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
     const fetchServices = async () => {
-        // Giả lập API fetch
-        const response = await axiosInstance.get('/Service');
+        const response = await fetchServiceAPI();
         const data = await response.data;
-        console.log(data)
         setServices(data);
     };
 
@@ -18,18 +21,10 @@ const ManageServices = () => {
         fetchServices();
     }, []);
 
-    const handleEdit = (serviceId) => {
-        alert(`Edit service ${serviceId}`);
-    };
-
-    const handleDelete = (serviceId) => {
-        if (window.confirm('Are you sure you want to delete this service?')) {
-            setServices(services.filter((s) => s.serviceId !== serviceId));
-        }
-    };
+    
 
     
-        const itemsPerPage = 6;
+        const itemsPerPage = 8;
         const [currentPage, setCurrentPage] = useState(1);
     
         const totalPages = Math.ceil(services.length / itemsPerPage);
@@ -37,21 +32,27 @@ const ManageServices = () => {
         const currentItems = services.slice(startIndex, startIndex + itemsPerPage);
     return (
         <div className="manage-services">
-            <h2>Manage Services</h2>
-            <div className="services-grid">
+            <div className="d-flex gap-2">
+          <button
+            className="add-btn w-20"
+            style={{
+              color: "rgb(0, 0, 0)",
+              border: `1px solid rgb(0, 0, 0)`,
+              backgroundColor: "transparent",
+            }}
+            onClick={() => setShowModal(true)}
+          >
+            <FaPlus className="me-1" />
+            Service
+          </button>
+        </div>
+            <div className="store-grid">
                 {currentItems.map(service => (
-                    <div className="service-card" key={service.serviceId}>
-                        <img src={service.imageDemo} alt={service.title} />
-                        <h3>{service.title}</h3>
-                        <p className="price">{service.price.toLocaleString()} VND</p>
-                        <p className="description">{service.description}</p>
-                        <div className="actions">
-                            <button onClick={() => handleEdit(service.serviceId)} className="edit-btn">Edit</button>
-                            <button onClick={() => handleDelete(service.serviceId)} className="delete-btn">Delete</button>
-                        </div>
-                    </div>
+                   <ServiceCard fetchServices={fetchServices} service = {service}/>
                 ))}
             </div>
+            
+                  <ModalAddService fetchServices={fetchServices} show={showModal} onClose={() => setShowModal(false)} />
             <Pagination
                         currentPage={currentPage}
                         totalPages={totalPages}

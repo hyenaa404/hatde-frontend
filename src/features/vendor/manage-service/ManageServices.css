@@ -1,67 +1,21 @@
-.manage-services {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 20px;
-    font-family: sans-serif;
-}
 
 .manage-services h2 {
     text-align: center;
     color: #f43f5e;
     margin-bottom: 30px;
 }
-
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
-}
-
-.service-card {
-    border: 1px solid #fbd5d5;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    background-color: #fff0f3;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.2s ease;
-}
-
-.service-card:hover {
-    transform: translateY(-5px);
-}
-
-.service-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-}
-
-.service-card h3 {
-    color: #f43f5e;
-    font-size: 18px;
-    margin: 12px;
-}
-
-.service-card .price {
-    margin: 0 12px;
-    font-weight: bold;
-    color: #d72c4d;
-}
-
-.service-card .description {
-    margin: 12px;
-    font-size: 14px;
-    color: #333;
-    flex-grow: 1;
-}
-
 .actions {
     display: flex;
     justify-content: space-between;
     padding: 12px;
     border-top: 1px solid #fbd5d5;
+}
+.wrap-div {
+    display: flex;
+    justify-content: space-between;
+}
+.pink{
+    color: #f43f5e;
 }
 
 .actions button {
@@ -89,4 +43,18 @@
 
 .delete-btn:hover {
     background-color: #fecdd3;
+}
+
+.add-btn {
+    margin-bottom: 40px;
+    padding: 10px 20px;
+}
+
+.service-info .location {
+    
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

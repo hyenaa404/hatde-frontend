@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Pagination from '../../../components/common/Pagination';
-import { fetchBookings } from './bookingServices'
+import { fetchBookings , updateBooking} from './bookingServices'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,9 +19,7 @@ export const BookingManage = () => {
 
     const [filteredBookings, setFilteredBookings] = useState([]);
     const [activeTab, setActiveTab] = useState('all');
-    useEffect(() => {
-
-        const fetchAndSort = async () => {
+    const fetchAndSort = async () => {
             try {
                 const data = await fetchBookings(user.id);
                 // setBookings(data);
@@ -36,11 +34,14 @@ export const BookingManage = () => {
 
 
         };
+    useEffect(() => {
+
+        
 
         if (user?.id) {
             fetchAndSort();
         }
-    }, []);
+    }, [fetchAndSort]);
 
 
     useEffect(() => {
@@ -56,8 +57,10 @@ export const BookingManage = () => {
         }
     };
 
-    const handleUpdate = (bookingId, preStatus) => {
-        alert("handle update status");
+    const handleUpdate = async(bookingId, nextStatus) => {
+        window.confirm("Confirm to update booking status?")
+        await updateBooking(bookingId,nextStatus)
+        fetchAndSort();
     };
 
     useEffect(() => {
@@ -78,8 +81,10 @@ export const BookingManage = () => {
             case 'pending':
                 return { label: 'Approve', nextStatus: 'approved' };
             case 'approved':
-                return { label: 'Prepare', nextStatus: 'preparing' };
+                return { label: 'Prepare', nextStatus: 'prepare' };
             case 'prepare':
+                return { label: 'Complete', nextStatus: 'completed' };
+            case 'preparing':
                 return { label: 'Complete', nextStatus: 'completed' };
             case 'completed':
                 return null; 

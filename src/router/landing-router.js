@@ -23,6 +23,7 @@ import AdminDashboard from '../features/admin/AdminDashboard';
 import { BookingManage } from '../features/admin/manage-booking/BookingManage';
 import ViewBooking from '../features/vendor/manage-booking/BookingManage';
 import ManageServices from '../features/vendor/manage-service/ManageServices';
+import UserList from '../features/admin/manage-user/UserList';
 
 // export const router = createBrowserRouter([
 //   {
@@ -87,6 +88,7 @@ export const router = createBrowserRouter([
       
       { path: 'admin/dashboard', element: <AdminDashboard /> },
       { path: 'admin/bookings', element: <BookingManage /> },
+      { path: 'admin/users', element: <UserList /> },
       
     ]
   }

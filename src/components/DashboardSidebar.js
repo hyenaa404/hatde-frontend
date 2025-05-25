@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { FaHome, FaBox, FaClipboardList,  FaStar, FaTags, FaPlus } from "react-icons/fa";
-import {  FaUsers,  FaChartBar, FaCog, FaUserShield } from "react-icons/fa";
+import { FaHome, FaBox, FaClipboardList, FaStar, FaTags, FaPlus } from "react-icons/fa";
+import { FaUsers, FaChartBar, FaCog, FaUserShield } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 
-const primaryColor = "#f43f5e";
+const primaryColor = "#201718";
 const VendorSidebar = () => {
   const location = useLocation();
   const [active, setActive] = useState("dashboard");
@@ -14,7 +14,7 @@ const VendorSidebar = () => {
     { id: "dashboard", label: "Dashboard", icon: <FaHome />, path: "/vendor/dashboard" },
     { id: "users", label: "Services", icon: <FaUsers />, path: "/vendor/services" },
     { id: "orders", label: "Bookings", icon: <FaClipboardList />, path: "/vendor/bookings" },
-    { id: "reports", label: "Reports", icon: <FaChartBar />, path: "/vendor/reports" },
+    { id: "reports", label: "Reports", icon: <FaChartBar />, path: "/vendor/dashboard" },
     { id: "settings", label: "Settings", icon: <FaCog />, path: "/vendor/settings" },
   ];
 
@@ -25,42 +25,31 @@ const VendorSidebar = () => {
   }, [location.pathname]);
 
   return (
-    <div className="d-flex flex-column bg-white p-3 shadow-sm" style={{ width: "250px", minHeight: "100vh" }}>
-      <div className="logo" style={{ marginBottom: "60px" }}>
-          <a href ="./"><span className="logo-hat">Hat</span><span className="logo-de">De</span></a>
+    <>
+      <div className="d-flex flex-column bg-white p-3 shadow-sm" style={{ width: "250px", minHeight: "100vh" }}>
+        <div className="logo" style={{ marginBottom: "60px" }}>
+          <a href="../"><span className="logo-hat">Hat</span><span className="logo-de">De</span></a>
         </div>
 
-      <ul className="nav flex-column mb-4">
-        {menuItems.map((item) => (
-          <li
-            key={item.id}
-            className={`nav-item mb-2 ${active === item.id ? "text-white rounded px-2 py-2" : "text-dark"}`}
-            style={active === item.id ? { backgroundColor: primaryColor } : { cursor: "pointer" }}
-            onClick={() => setActive(item.id)}
-          >
-            <Link to={item.path} className="text-decoration-none text-reset d-flex align-items-center">
-              <span className="me-2 fs-5">{item.icon}</span>
-              <span className="fw-semibold">{item.label}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+        <ul className="nav flex-column mb-4">
+          {menuItems.map((item) => (
+            <li
+              key={item.id}
+              className={`nav-item mb-2 ${active === item.id ? "text-white rounded px-2 py-2" : "text-dark"}`}
+              style={active === item.id ? { backgroundColor: primaryColor } : { cursor: "pointer" }}
+              onClick={() => setActive(item.id)}
+            >
+              <Link to={item.path} className="text-decoration-none text-reset d-flex align-items-center">
+                <span className="me-2 fs-5">{item.icon}</span>
+                <span className="fw-semibold">{item.label}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
 
-      <div className="d-flex gap-2">
-        <button
-          className="btn w-50"
-          style={{
-            color: primaryColor,
-            border: `1px solid ${primaryColor}`,
-            backgroundColor: "transparent",
-          }}
-        >
-          <FaPlus className="me-1" />
-          Service
-        </button>
-        <button className="btn btn-outline-success w-50">Add Coupon</button>
+        
       </div>
-    </div>
+</>
   );
 };
 
@@ -76,9 +65,9 @@ export const AdminSidebar = () => {
     { id: "dashboard", label: "Dashboard", icon: <FaHome />, path: "/admin/dashboard" },
     { id: "users", label: "Users", icon: <FaUsers />, path: "/admin/users" },
     { id: "orders", label: "Bookings", icon: <FaClipboardList />, path: "/admin/bookings" },
-    { id: "reports", label: "Reports", icon: <FaChartBar />, path: "/admin/reports" },
+    { id: "reports", label: "Reports", icon: <FaChartBar />, path: "/admin/dashboard" },
     { id: "settings", label: "Settings", icon: <FaCog />, path: "/admin/settings" },
-    { id: "admins", label: "Admins", icon: <FaUserShield />, path: "/admin/admins" },
+    { id: "admins", label: "Admins", icon: <FaUserShield />, path: "/admin/dashboard" },
   ];
 
   useEffect(() => {
@@ -90,8 +79,8 @@ export const AdminSidebar = () => {
   return (
     <div className="d-flex flex-column bg-white p-3 shadow-sm" style={{ width: "250px", minHeight: "100vh" }}>
       <div className="logo" style={{ marginBottom: "60px" }}>
-          <a href ="./"><span className="logo-hat">Hat</span><span className="logo-de">De</span></a>
-        </div>
+        <a href="../"><span className="logo-hat">Hat</span><span className="logo-de">De</span></a>
+      </div>
 
       <ul className="nav flex-column mb-4">
         {menuItems.map((item) => (

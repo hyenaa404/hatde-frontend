@@ -27,9 +27,9 @@ export const PrivateVendorRoute = ({ children }) => {
     const user = useSelector((state)=> state.auth.user);
   
 
-    // if (!isAuthenticated || user.role != "vendor") {
-    //     return <Navigate to="/home" replace />;
-    // }
+    if (!isAuthenticated || user.role != "vendor") {
+        return <Navigate to="/" replace />;
+    }
 
         return children;
     
@@ -42,9 +42,9 @@ export const PrivateAdminRoute = ({ children }) => {
     const user = useSelector((state)=> state.auth.user);
   
 
-    // if (!isAuthenticated || user.role != "admin") {
-    //     return <Navigate to="/home" replace />;
-    // }
+    if (!isAuthenticated || user.role != "admin") {
+        return <Navigate to="/" replace />;
+    }
 
         return children;
     
