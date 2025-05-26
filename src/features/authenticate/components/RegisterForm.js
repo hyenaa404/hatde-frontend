@@ -17,12 +17,33 @@ export default function RegisterForm() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [phoneError, setPhoneError] = useState('');
   const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState('');
   const [address, setAddress] = useState("");
   const [role, setRole] = useState("user");
   const [businessName, setBusinessName] = useState("");
   const [description, setDescription] = useState("");
   const [mst, setMst] = useState("");
+
+  const validatePassword = (pwd) => {
+    const regex = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
+    if (!regex.test(pwd)) {
+      setPasswordError("Mật khẩu phải có ít nhất 6 ký tự, 1 chữ hoa và 1 số.");
+    } else {
+      setPasswordError('');
+    }
+  };
+
+  const validatePhone = (value) => {
+    const regex = /^(0\d{9,10})$/;
+    if (!regex.test(value)) {
+      setPhoneError("Số điện thoại không hợp lệ. Phải bắt đầu bằng 0 và có 10–11 số.");
+    } else {
+      setPhoneError('');
+    }
+  };
+
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -83,8 +104,20 @@ export default function RegisterForm() {
 
         <div className="input-icon">
           <i className="fas fa-phone"></i>
-          <input type="text" placeholder="Số điện thoại" required value={phone} onChange={(e) => setPhone(e.target.value)} />
+          <input
+            type="text"
+            placeholder="Số điện thoại"
+            required
+            value={phone}
+            onChange={(e) => {
+              const value = e.target.value;
+              setPhone(value);
+              validatePhone(value);
+            }}
+          />
         </div>
+        {phoneError && <p className="error-text">{phoneError}</p>}
+
 
         <div className="input-icon">
           <i className="fas fa-map-marker-alt"></i>
@@ -112,8 +145,20 @@ export default function RegisterForm() {
 
         <div className="input-icon">
           <i className="fas fa-lock"></i>
-          <input type="password" placeholder="Mật khẩu" required value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input
+            type="password"
+            placeholder="Mật khẩu"
+            required
+            value={password}
+            onChange={(e) => {
+              const pwd = e.target.value;
+              setPassword(pwd);
+              validatePassword(pwd);
+            }}
+          />
         </div>
+        {passwordError && <p className="error-text">{passwordError}</p>}
+
 
         <div className="checkbox-row">
           <label>

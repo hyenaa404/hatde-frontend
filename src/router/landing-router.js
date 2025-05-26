@@ -24,6 +24,7 @@ import { BookingManage } from '../features/admin/manage-booking/BookingManage';
 import ViewBooking from '../features/vendor/manage-booking/BookingManage';
 import ManageServices from '../features/vendor/manage-service/ManageServices';
 import UserList from '../features/admin/manage-user/UserList';
+import PaymentReturn from '../features/booking/pages/PaymentReturn';
 
 // export const router = createBrowserRouter([
 //   {
@@ -62,7 +63,8 @@ export const router = createBrowserRouter([
       { path: 'cart', element: <CartForm /> },
       { path: 'booking-history', element: <BookingHistory /> },
       { path: 'payment', element: <PaymentPage /> },
-      { path: 'test', element: <History /> },
+      { path: 'transaction', element: <PaymentReturn /> },
+
       
       
       

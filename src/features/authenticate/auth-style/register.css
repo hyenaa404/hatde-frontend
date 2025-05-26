@@ -6,6 +6,12 @@
     background-color: #f9f9fb;
     font-family: 'Segoe UI', sans-serif;
   }
+  .error-text {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
   
   .register-form {
     margin: 30px 30px;

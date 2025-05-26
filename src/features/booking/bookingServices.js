@@ -1,5 +1,5 @@
 import { createAsyncThunk, rejectWithValue } from "@reduxjs/toolkit";
-import { addBookingAPI, fetchBookingByUserAPI, paymentAPI } from "./bookingAPI";
+import { addBookingAPI, fetchBookingByUserAPI, paymentAPI , paymentStatusAPI} from "./bookingAPI";
 
 export const addBooking = async (data) => {
     try {
@@ -29,5 +29,15 @@ export const getPayment = async (id, total) => {
         
     } catch (error) {
         console.error("Lỗi khi tải thông tin thanh toán:", error);
+    }
+};
+
+export const changePaymentStatus = async (id, status) => {
+    try {
+        const res = await paymentStatusAPI(id, status)
+        return res.data;
+        
+    } catch (error) {
+        console.error("Lỗi khi update thông tin thanh toán:", error);
     }
 };

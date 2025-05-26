@@ -32,6 +32,8 @@ export const LandingNavbar = () => {
   
 
   export const HomeNavbar = () => {
+    
+    
     return (
       <header className="main-header">
         <div className="logo">
@@ -39,6 +41,7 @@ export const LandingNavbar = () => {
         </div>
   
         <nav className="nav-menu">
+
         <a href="../">Trang chủ</a>
         <a href="../wedding">Dịch vụ</a>
         <a href="../accessory">Phụ kiện trang trí</a>

@@ -22,3 +22,9 @@ export const paymentAPI = (id, total) => {
     withCredentials: true,
   });
 }
+
+export const paymentStatusAPI = (id, status) => {
+  return axiosInstance.post(`/Payment/change-status/?paymentId=${id}&&status=${status}`, {
+    withCredentials: true,
+  });
+}

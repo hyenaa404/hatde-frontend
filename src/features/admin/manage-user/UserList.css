@@ -70,8 +70,9 @@
   font-size: 13px;
   font-weight: 500;
   text-transform: capitalize;
-  display: inline-block;
-  width: 70px;
+  display: flex;
+    width: 70px;
+    justify-content: center;
 }
 
 .status-badge.active {

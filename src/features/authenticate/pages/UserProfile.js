@@ -18,6 +18,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const UserProfile = () => {
     const dispatch = useDispatch()
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const user = useSelector((state) => state.auth.user);
     console.log(user)
     return (
@@ -38,16 +39,17 @@ const UserProfile = () => {
                     </div>
 
                     <ul className="list-unstyled">
+                        
                         <li className="mb-3">
                             <button className="btn btn-pink w-100 text-start fw-bold">
                                 <i className="bi bi-person me-2"></i> Thông tin cá nhân
                             </button>
                         </li>
                         <li className="mb-3">
-                            <a href = "./booking-history">
-                            <button className="btn btn-light w-100 text-start">
-                                <i className="bi bi-clock-history me-2"></i> Lịch sử đặt hàng
-                            </button>
+                            <a href="./booking-history">
+                                <button className="btn btn-light w-100 text-start">
+                                    <i className="bi bi-clock-history me-2"></i> Lịch sử đặt hàng
+                                </button>
                             </a>
                         </li>
                         <li className="mb-3">
@@ -65,11 +67,26 @@ const UserProfile = () => {
                                 <i className="bi bi-gear me-2"></i> Cài đặt
                             </button>
                         </li>
+                        {isAuthenticated && user?.role === "vendor" && (
+                            <a href="../vendor/dashboard">
+                                <button className="btn btn-light w-100 text-start">
+                                    <i className="bi bi-speedometer2 me-2"></i> Quản lí Cửa hàng
+                                </button>
+                            </a>
+                        )}
+
+                        {isAuthenticated && user?.role === "admin" && (
+                            <a href="../admin/dashboard">
+                                <button className="btn btn-light w-100 text-start">
+                                    <i className="bi bi-shield-lock me-2"></i> Quản lí Dịch vụ web
+                                </button>
+                            </a>
+                        )}
                         <li className="mt-4">
                             <a href='./logout'>
-                            <button className="btn btn-link text-danger w-100 text-start">
-                                <i className="bi bi-box-arrow-right me-2"></i> Đăng xuất
-                            </button>
+                                <button className="btn btn-link text-danger w-100 text-start">
+                                    <i className="bi bi-box-arrow-right me-2"></i> Đăng xuất
+                                </button>
                             </a>
                         </li>
                     </ul>

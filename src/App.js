@@ -7,13 +7,7 @@ import { setCategories } from "./services/categorySlice";
 
 function App() {
     const dispatch = useDispatch();
-    // const authStatus = useSelector((state) => state.auth.isAuthenticated)
-    // const authStatus = true;
-    // useEffect(()=> {
-    //     if(authStatus === null){
-    //     dispatch(checkAuthStatus());
-    // }
-    // }, [])
+    
     useEffect(() => {
         const fetchCategories = async () => {
             try {

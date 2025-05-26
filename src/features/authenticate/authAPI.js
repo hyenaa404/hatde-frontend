@@ -31,7 +31,7 @@ export const registerAPI = (data) => {
       fullname: data.fullname,
       email: data.email,
       password: data.password,
-      phone: data.password,
+      phone: data.phone,
       address: data.address,
       role: data.role,
       businessName: data.businessName,

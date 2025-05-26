@@ -1,5 +1,5 @@
 
-import { fetchBookingAPI, updateBookingAPI } from "./bookingAPI";
+import { fetchBookingAPI, updateBookingAPI, fetchBookingDetailAPI } from "./bookingAPI";
 
 
 
@@ -12,6 +12,18 @@ export const fetchBookings = async () => {
         console.error("Lỗi khi tải bookings:", error);
     }
 };
+
+
+export const fetchBookingDetail = async (id) => {
+    try {
+        const res = await fetchBookingDetailAPI(id)
+        return res.data;
+        
+    } catch (error) {
+        console.error(`Lỗi khi tải bookings: ${id}`, error);
+    }
+};
+
 
 
 export const updateBooking = async (id, nextStatus) => {

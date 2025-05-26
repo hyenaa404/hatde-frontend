@@ -108,11 +108,12 @@ const BookingHistory = () => {
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Ngày tổ chức</th>
+                                {/* <th>Ngày tổ chức</th> */}
                                 <th>Ngày đặt</th>
                                 <th>Dịch vụ</th>
+                                <th>Phương thức</th>
                                 <th>Thanh toán</th>
-                                <th>Trạng thái</th>
+                                <th>Trạng thái </th>
                                 <th>Tổng tiền</th>
                                 <th>Thao tác</th>
                             </tr>
@@ -121,12 +122,27 @@ const BookingHistory = () => {
                             {currentItems.map((booking) => (
                                 <tr key={booking.bookingId} onClick={() => setSelectedBooking(booking)} className="clickable-row">
                                     <td>{booking.bookingId}</td>
-                                    <td>{new Date(booking.eventDate).toLocaleDateString()}</td>
+                                    {/* <td>{new Date(booking.eventDate).toLocaleDateString()}</td> */}
                                     <td>{new Date(booking.createdAt).toLocaleDateString()}</td>
                                     <td className="booking-services">
                                         {booking.bookingDetails.map(detail => detail.service.title).join(" • ")}
                                     </td>
                                     <td>{booking.paymentMethod}</td>
+                                    <td>
+                                        {booking.paymentMethod === 'vnpay' && (
+                                            <span className={`status-badge status-pending`}>
+                                                {booking.payments && booking.payments.length > 0
+                                                    ? booking.payments[booking.payments.length - 1].paymentStatus.toUpperCase()
+                                                    : "UNPAID"}
+                                            </span>
+                                        )}
+                                        {booking.paymentMethod === 'cash' && (
+                                            <span className={`status-badge status-pending`}>
+                                                {booking.status ==='pending'
+                                                    ? 'UNPAID' : "PAID"}
+                                            </span>
+                                        )}
+                                    </td>
                                     <td>
                                         <span className={`status-badge status-${booking.status}`}>
                                             {booking.status}
@@ -134,7 +150,7 @@ const BookingHistory = () => {
                                     </td>
                                     <td>{Number(booking.totalPrice).toLocaleString()} VND</td>
                                     <td>
-                                        {booking.status === 'approved' && booking.paymentMethod === 'vnpay' && (
+                                        {booking.status === 'approved' && booking.paymentMethod === 'vnpay' && booking.payments && (booking.payments.length== 0 || ( booking.payments[booking.payments.length - 1].paymentStatus!="paid")) && (
                                             <button
                                                 onClick={(e) => {
                                                     e.stopPropagation();
@@ -151,6 +167,7 @@ const BookingHistory = () => {
                         </tbody>
 
                     </table>
+
 
                     {selectedBooking && (
                         <div className="overlay-booking">
@@ -188,7 +205,10 @@ const BookingHistory = () => {
                                         </div>
                                     </div>
                                     <div className='order-information'>
-                                        <p><strong>Trạng thái:</strong> <span className={`status-badge status-${selectedBooking.status}`}>{selectedBooking.status}</span></p>
+                                        <p><strong>Trạng thái đơn hàng:</strong> <span className={`status-badge status-${selectedBooking.status}`}>{selectedBooking.status}</span></p>
+                                        <p><strong>Trạng thái thanh toán:</strong> <span className={`status-badge status-pending`}>{selectedBooking.payments && selectedBooking.payments.length > 0
+                                            ? selectedBooking.payments[selectedBooking.payments.length - 1].paymentStatus
+                                            : "UNPAID"}</span></p>
                                         <p><strong>Địa chỉ:</strong> {selectedBooking.user.address}</p>
                                         <p><strong>Ngày tổ chức:</strong> {new Date(selectedBooking.eventDate).toLocaleString()}</p>
                                         <p><strong>Ngày đặt:</strong> {new Date(selectedBooking.createdAt).toLocaleString()}</p>

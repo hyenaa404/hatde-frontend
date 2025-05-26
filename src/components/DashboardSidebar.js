@@ -46,7 +46,15 @@ const VendorSidebar = () => {
             </li>
           ))}
         </ul>
-
+        <div className="d-flex gap-2">
+        <div className="mt-4">
+                            <a href='../logout'>
+                                <button className="btn btn-link text-danger w-100 text-start">
+                                    <i className="bi bi-box-arrow-right me-2"></i> Đăng xuất
+                                </button>
+                            </a>
+                        </div>
+      </div>
         
       </div>
 </>
@@ -96,21 +104,17 @@ export const AdminSidebar = () => {
             </Link>
           </li>
         ))}
+        
       </ul>
 
       <div className="d-flex gap-2">
-        <button
-          className="btn w-50"
-          style={{
-            color: primaryColor,
-            border: `1px solid ${primaryColor}`,
-            backgroundColor: "transparent",
-          }}
-        >
-          <FaPlus className="me-1" />
-          User
-        </button>
-        <button className="btn btn-outline-success w-50">Report</button>
+        <div className="mt-4">
+                            <a href='../logout'>
+                                <button className="btn btn-link text-danger w-100 text-start">
+                                    <i className="bi bi-box-arrow-right me-2"></i> Đăng xuất
+                                </button>
+                            </a>
+                        </div>
       </div>
     </div>
   );

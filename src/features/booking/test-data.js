@@ -1,4 +1,4 @@
-export const fetchBookings = [
+const fetchBookings = [
             {
                 "bookingId": 1,
                 "userId": 1,
@@ -153,3 +153,5 @@ export const fetchBookings = [
                 "reviews": null
             }
         ]
+
+        console.log(fetchBookings[1].eventDate)

@@ -5,10 +5,19 @@ import axiosInstance from "../../../services/axiosInstance";
 
 
 export const fetchBookingAPI = () => {
-  return axiosInstance.get(`/Booking/user/1`, {
-    withCredentials: true,
+  return axiosInstance.get(`/Booking/`, {
+    withCredentials: true, 
   });
 }
+
+export const fetchBookingDetailAPI = (id) => {
+  console.log(`fetch ${id}`)
+  return axiosInstance.get(`/Booking/${id}`, {
+    withCredentials: true,
+    // timeout: 20000,
+  });
+}
+
 
 
 // export const updateBookingAPI = (id, nextStatus) => {

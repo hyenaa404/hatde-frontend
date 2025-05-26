@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Pagination from '../../../components/common/Pagination';
-import { fetchBookings } from './bookingServices'
+import { fetchBookingDetail , fetchBookings} from '../../admin/manage-booking/bookingServices';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 export const ViewBooking = () => {
     const [selectedBooking, setSelectedBooking] = useState(null);
+    
+        const [selectedBookingDetail, setSelectedBookingDetail] = useState(null);
 
 
     const navigate = useNavigate();
@@ -19,28 +21,42 @@ export const ViewBooking = () => {
 
     const [filteredBookings, setFilteredBookings] = useState([]);
     const [activeTab, setActiveTab] = useState('all');
-    useEffect(() => {
-
-        const fetchAndSort = async () => {
-            try {
-                const data = await fetchBookings(user.id);
-                // setBookings(data);
-                setFetchStatus(true)
-                var sorted = [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-                // sorted = sorted.map(booking => ({ ...booking, status: "approved" }));
-                setBookings(sorted);
-                filterByTab(sorted, activeTab);
-            } catch (error) {
-                console.error("Lỗi fetch bookings:", error);
+    const fetchAndSort = async () => {
+                try {
+                    const data = await fetchBookings(user.id);
+                    // setBookings(data);
+                    setFetchStatus(true)
+                    var sorted = [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                    // sorted = sorted.map(booking => ({ ...booking, status: "approved" }));
+                    setBookings(sorted);
+                    filterByTab(sorted, activeTab);
+                } catch (error) {
+                    console.error("Lỗi fetch bookings:", error);
+                }
+    
+    
+            };
+    
+            const fetchDetail = async (id) => {
+                try {
+                    const data = await fetchBookingDetail(id);
+                    setSelectedBookingDetail(data)
+                } catch (error) {
+                    console.error("Lỗi fetch booking detail:", error);
+                }
+    
+    
+            };
+        useEffect(() => {
+    
+            
+    
+            if (user?.id) {
+                fetchAndSort();
             }
-
-
-        };
-
-        if (user?.id) {
-            fetchAndSort();
-        }
-    }, []);
+        }, []);
+    
+    
 
 
     useEffect(() => {
@@ -74,6 +90,7 @@ export const ViewBooking = () => {
    
 
 
+   
     return (
         <div className="booking-history">
 
@@ -108,7 +125,7 @@ export const ViewBooking = () => {
                                 <th>#</th>
                                 <th>Ngày tổ chức</th>
                                 <th>Ngày đặt</th>
-                                <th>Dịch vụ</th>
+                                {/* <th>Dịch vụ</th> */}
                                 <th>Thanh toán</th>
                                 <th>Trạng thái</th>
                                 <th>Tổng tiền</th>
@@ -116,13 +133,13 @@ export const ViewBooking = () => {
                         </thead>
                         <tbody>
                             {currentItems.map((booking) => (
-                                <tr key={booking.bookingId} onClick={() => setSelectedBooking(booking)} className="clickable-row">
+                                <tr key={booking.bookingId} onClick={() => fetchDetail(booking.bookingId)} className="clickable-row">
                                     <td>{booking.bookingId}</td>
                                     <td>{new Date(booking.eventDate).toLocaleDateString()}</td>
                                     <td>{new Date(booking.createdAt).toLocaleDateString()}</td>
-                                    <td className="booking-services">
+                                    {/* <td className="booking-services">
                                         {booking.bookingDetails.map(detail => detail.service.title).join(" • ")}
-                                    </td>
+                                    </td> */}
                                     <td>{booking.paymentMethod}</td>
                                     <td>
                                         <span className={`status-badge status-${booking.status}`}>
@@ -136,18 +153,19 @@ export const ViewBooking = () => {
                         </tbody>
 
                     </table>
+                    {/* {selectedBooking && fetchDetail(selectedBooking.bookingId)} */}
 
-                    {selectedBooking && (
+                    {selectedBookingDetail && (
                         <div className="overlay-booking">
                             <div className="modal-booking">
-                                <button className="close-btn" onClick={() => setSelectedBooking(null)}>×</button>
-                                <h3>Chi tiết đơn hàng #{selectedBooking.bookingId}</h3>
+                                <button className="close-btn" onClick={() => setSelectedBookingDetail(null)}>×</button>
+                                <h3>Chi tiết đơn hàng #{selectedBookingDetail.bookingId}</h3>
                                 <div className='order-detail-wrapper'>
                                     <div className='service-item'>
                                         <div className="cart-page">
 
                                             <div className="cart-list">
-                                                {selectedBooking.bookingDetails.map(item => (
+                                                {selectedBookingDetail.bookingDetails.map(item => (
                                                     <div key={item.service.serviceId} className="cart-item">
                                                         <img src={item.service.imageDemo} alt={item.service.title} />
                                                         <div className="cart-info">
@@ -164,7 +182,7 @@ export const ViewBooking = () => {
 
                                                 <div className="summary-row total">
                                                     <strong>Tổng chi phí</strong>
-                                                    <strong>{selectedBooking.totalPrice.toLocaleString()} VND</strong>
+                                                    <strong>{selectedBookingDetail.totalPrice.toLocaleString()} VND</strong>
                                                 </div>
                                             </div>
 
@@ -173,13 +191,13 @@ export const ViewBooking = () => {
                                         </div>
                                     </div>
                                     <div className='order-information'>
-                                        <p><strong>Trạng thái:</strong> <span className={`status-badge status-${selectedBooking.status}`}>{selectedBooking.status}</span></p>
-                                        <p><strong>Địa chỉ:</strong> {selectedBooking.user.address}</p>
-                                        <p><strong>Ngày tổ chức:</strong> {new Date(selectedBooking.eventDate).toLocaleString()}</p>
-                                        <p><strong>Ngày đặt:</strong> {new Date(selectedBooking.createdAt).toLocaleString()}</p>
-                                        <p><strong>Ghi chú:</strong> {selectedBooking.note}</p>
-                                        <p><strong>Khách hàng:</strong> {selectedBooking.user.fullName}</p>
-                                        <p><strong>SĐT:</strong> {selectedBooking.user.phone}</p>
+                                        <p><strong>Trạng thái:</strong> <span className={`status-badge status-${selectedBookingDetail.status}`}>{selectedBookingDetail.status}</span></p>
+                                        <p><strong>Địa chỉ:</strong> {selectedBookingDetail.user.address}</p>
+                                        <p><strong>Ngày tổ chức:</strong> {new Date(selectedBookingDetail.eventDate).toLocaleString()}</p>
+                                        <p><strong>Ngày đặt:</strong> {new Date(selectedBookingDetail.createdAt).toLocaleString()}</p>
+                                        <p><strong>Ghi chú:</strong> {selectedBookingDetail.note}</p>
+                                        <p><strong>Khách hàng:</strong> {selectedBookingDetail.user.fullName}</p>
+                                        <p><strong>SĐT:</strong> {selectedBookingDetail.user.phone}</p>
                                     </div>
                                 </div>
                             </div>
