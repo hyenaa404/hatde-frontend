@@ -27,12 +27,9 @@ export const fetchBookingDetail = async (id) => {
 
 
 export const updateBooking = async (id, nextStatus) => {
-    try {
+    
         const res = await updateBookingAPI(id,nextStatus)
         return res.data;
-        
-    } catch (error) {
-        console.error("Lỗi khi tải bookings:", error);
-    }
+       
 };
 
