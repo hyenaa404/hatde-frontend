@@ -1,48 +1,40 @@
 
 import { availabilityOptions, priceRanges, ratingOptions } from './filterdata';
 
-export const Sidebar = () => {
+export const Sidebar = ({ selectedPriceRanges, setSelectedPriceRanges }) => {
+
+  const handleCheckboxChange = (value) => {
+    if (selectedPriceRanges.includes(value)) {
+      setSelectedPriceRanges(selectedPriceRanges.filter(item => item !== value));
+    } else {
+      setSelectedPriceRanges([...selectedPriceRanges, value]);
+    }
+  };
+
   return (
     <aside className="sidebar">
-      
-
       <div className="filter-section">
         <h3>Phạm vi giá</h3>
         <ul>
           {priceRanges.map((item, index) => (
             <li key={index}>
-              <input type="checkbox" /> {item}
+              <input
+                type="checkbox"
+                checked={selectedPriceRanges.includes(item)}
+                onChange={() => handleCheckboxChange(item)}
+              />{" "}
+              {item}
             </li>
           ))}
         </ul>
       </div>
 
-      <div className="filter-section">
-        <h3>Khả dụng</h3>
-        <ul>
-          {availabilityOptions.map((item, index) => (
-            <li key={index}>
-              <input type="checkbox" /> {item}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="filter-section">
-        <h3>Xếp hạng</h3>
-        <ul>
-          {ratingOptions.map((item, index) => (
-            <li key={index}>
-              <input type="checkbox" /> {item}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <button className="clear-btn">Clear All Filters</button>
-
-      
+      <button className="clear-btn" onClick={() => setSelectedPriceRanges([])}>
+        Clear All Filters
+      </button>
     </aside>
   );
-}
+};
+
 
 export default Sidebar;

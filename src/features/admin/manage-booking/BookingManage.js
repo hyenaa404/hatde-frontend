@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Pagination from '../../../components/common/Pagination';
-import { fetchBookings , updateBooking, fetchBookingDetail} from './bookingServices'
+import { fetchBookings, updateBooking, fetchBookingDetail } from './bookingServices'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,34 +21,34 @@ export const BookingManage = () => {
     const [filteredBookings, setFilteredBookings] = useState([]);
     const [activeTab, setActiveTab] = useState('all');
     const fetchAndSort = async () => {
-            try {
-                const data = await fetchBookings(user.id);
-                // setBookings(data);
-                setFetchStatus(true)
-                var sorted = [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-                // sorted = sorted.map(booking => ({ ...booking, status: "approved" }));
-                setBookings(sorted);
-                filterByTab(sorted, activeTab);
-            } catch (error) {
-                console.error("Lỗi fetch bookings:", error);
-            }
+        try {
+            const data = await fetchBookings(user.id);
+            // setBookings(data);
+            setFetchStatus(true)
+            var sorted = [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            // sorted = sorted.map(booking => ({ ...booking, status: "approved" }));
+            setBookings(sorted);
+            filterByTab(sorted, activeTab);
+        } catch (error) {
+            console.error("Lỗi fetch bookings:", error);
+        }
 
 
-        };
+    };
 
-        const fetchDetail = async (id) => {
-            try {
-                const data = await fetchBookingDetail(id);
-                setSelectedBookingDetail(data)
-            } catch (error) {
-                console.error("Lỗi fetch booking detail:", error);
-            }
+    const fetchDetail = async (id) => {
+        try {
+            const data = await fetchBookingDetail(id);
+            setSelectedBookingDetail(data)
+        } catch (error) {
+            console.error("Lỗi fetch booking detail:", error);
+        }
 
 
-        };
+    };
     useEffect(() => {
 
-        
+
 
         if (user?.id) {
             fetchAndSort();
@@ -69,13 +69,18 @@ export const BookingManage = () => {
         }
     };
 
-    const handleUpdate = async(bookingId, nextStatus) => {
+    const handleUpdate = async (bookingId, nextStatus) => {
         window.confirm("Confirm to update booking status?")
-        await updateBooking(bookingId,nextStatus)
-        fetchAndSort();
+        try {
+            await updateBooking(bookingId, nextStatus)
+            fetchAndSort();
+        } catch (error) {
+            alert(`Failed to update status to ${nextStatus}`)
+        }
+
     };
 
-    
+
 
 
 
@@ -97,8 +102,8 @@ export const BookingManage = () => {
             case 'preparing':
                 return { label: 'Complete', nextStatus: 'completed' };
             case 'completed':
-                return null; 
-            case 'canceled':
+                return null;
+            case 'cancel':
                 return null;
             default:
                 return null;
@@ -145,6 +150,7 @@ export const BookingManage = () => {
                                 <th>Trạng thái</th>
                                 <th>Tổng tiền</th>
                                 <th>Thao tác</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -173,14 +179,28 @@ export const BookingManage = () => {
                                                             e.stopPropagation();
                                                             handleUpdate(booking.bookingId, action.nextStatus);
                                                         }}
-                                                        className="pay-button" 
+                                                        className="pay-button"
                                                     >
                                                         {action.label}
                                                     </button>
+
                                                 );
                                             }
                                             return null;
                                         })()}
+                                    </td>
+                                    <td>{booking.status && booking.status != 'cancel' && booking.status != "completed" && (
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleUpdate(booking.bookingId, "cancel");
+                                            }}
+                                            className="cancel-button"
+                                        >
+                                            Cancel
+                                        </button>
+                                    )}
+
                                     </td>
                                 </tr>
                             ))}

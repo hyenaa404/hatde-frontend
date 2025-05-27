@@ -4,27 +4,52 @@ import "./styles/services.css"
 import { getWeddingServices } from "../data/data"
 import CategoryFilter from "./wedding/CategoryFilter";
 import Pagination from "../../components/common/Pagination";
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 function WeddingServices() {
-  
+
   const [weddingServices, setWeddingServices] = useState([]);
+  const [selectedPriceRanges, setSelectedPriceRanges] = useState([]);
+
 
   useEffect(() => {
-  const fetchData = async () => {
+    const fetchData = async () => {
       const weddingServices = await getWeddingServices();
-      setWeddingServices(weddingServices); 
-  };
+      setWeddingServices(weddingServices);
+    };
 
-  fetchData();
-}, []);
+    fetchData();
+  }, []);
 
   const itemsPerPage = 6;
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.ceil(weddingServices.length / itemsPerPage);
+  const filterByPriceRange = (services, selectedRanges) => {
+    if (selectedRanges.length === 0) return services;
+
+    return services.filter(service => {
+      const price = service.price;
+
+      return selectedRanges.some(range => {
+        if (range === 'Dưới 3tr') return price < 3000000;
+        if (range === '3tr - 5tr') return price >= 3000000 && price <= 5000000;
+        if (range === '5tr - 7tr') return price > 5000000 && price <= 7000000;
+        if (range === '7tr - 10tr') return price > 7000000 && price <= 10000000;
+        if (range === 'Trên 10tr') return price > 10000000;
+        return true;
+      });
+    });
+  };
+
+  const filteredServices = filterByPriceRange(weddingServices, selectedPriceRanges);
+  const totalPages = Math.ceil(filteredServices.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = weddingServices.slice(startIndex, startIndex + itemsPerPage);
+  const currentItems = filteredServices.slice(startIndex, startIndex + itemsPerPage);
+
+
+  // const totalPages = Math.ceil(weddingServices.length / itemsPerPage);
+  // const startIndex = (currentPage - 1) * itemsPerPage;
+  // const currentItems = weddingServices.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <>
@@ -34,7 +59,11 @@ function WeddingServices() {
       </div>
       <CategoryFilter />
       <div className="stores-content">
-        <Sidebar />
+        <Sidebar
+          selectedPriceRanges={selectedPriceRanges}
+          setSelectedPriceRanges={setSelectedPriceRanges}
+        />
+
         <main className="main-content">
           <div className="header-bar">
             <div>View: <i className="bi bi-grid-fill"></i> <i className="bi bi-list"></i></div>

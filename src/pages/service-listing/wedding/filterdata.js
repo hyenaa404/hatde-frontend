@@ -1,11 +1,11 @@
 
 
 export const priceRanges = [
-  'Under $100',
-  '$100 - $500',
-  '$500 - $1000',
-  '$1000 - $5000',
-  'Over $5000',
+  'Dưới 3tr',
+  '3tr - 5tr',
+  '5tr - 7tr',
+  '7tr - 10tr',
+  'Trên 10tr',
 ];
 
 
