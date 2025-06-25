@@ -5,10 +5,10 @@ import { fetchBookingsByUser } from '../bookingServices';
 import { useSelector } from 'react-redux';
 import { fetchBookings } from '../test-data';
 import { useNavigate } from 'react-router-dom';
+import { updateBookingAPI } from '../../admin/manage-booking/bookingAPI';
 
 const BookingHistory = () => {
     const [selectedBooking, setSelectedBooking] = useState(null);
-
 
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
@@ -21,24 +21,20 @@ const BookingHistory = () => {
 
     const [filteredBookings, setFilteredBookings] = useState([]);
     const [activeTab, setActiveTab] = useState('all');
+    const fetchAndSort = async () => {
+        try {
+            const data = await fetchBookingsByUser(user.id);
+            // setBookings(data);
+            setFetchStatus(true)
+            var sorted = [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            // sorted = sorted.map(booking => ({ ...booking, status: "approved" }));
+            setBookings(sorted);
+            filterByTab(sorted, activeTab);
+        } catch (error) {
+            console.error("Lỗi fetch bookings:", error);
+        }
+    };
     useEffect(() => {
-
-        const fetchAndSort = async () => {
-            try {
-                const data = await fetchBookingsByUser(user.id);
-                // setBookings(data);
-                setFetchStatus(true)
-                var sorted = [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-                // sorted = sorted.map(booking => ({ ...booking, status: "approved" }));
-                setBookings(sorted);
-                filterByTab(sorted, activeTab);
-            } catch (error) {
-                console.error("Lỗi fetch bookings:", error);
-            }
-
-
-        };
-
         if (user?.id) {
             fetchAndSort();
         }
@@ -61,7 +57,21 @@ const BookingHistory = () => {
     const handlePayment = (bookingId, totalPrice) => {
         navigate(`/payment?bookingId=${bookingId}&totalPrice=${totalPrice}`);
     };
-
+    const cancelBooking = async (bookingId, status) => {
+        try {
+            await updateBookingAPI(bookingId, status);
+            setFilteredBookings(prevItems =>
+                prevItems.map(item =>
+                    item.bookingId === bookingId
+                        ? { ...item, status: status }
+                        : item
+                )
+            );
+            alert("Hủy đơn hàng thành công.");
+        } catch (error) {
+            console.error("Lỗi khi hủy đơn:", error);
+        }
+    }
     useEffect(() => {
         console.log(selectedBooking)
     }, [selectedBooking])
@@ -138,7 +148,7 @@ const BookingHistory = () => {
                                         )}
                                         {booking.paymentMethod === 'cash' && (
                                             <span className={`status-badge status-pending`}>
-                                                {booking.status ==='pending'
+                                                {booking.status === 'pending' || booking.status === 'cancel'
                                                     ? 'UNPAID' : "PAID"}
                                             </span>
                                         )}
@@ -150,7 +160,7 @@ const BookingHistory = () => {
                                     </td>
                                     <td>{Number(booking.totalPrice).toLocaleString()} VND</td>
                                     <td>
-                                        {booking.status === 'approved' && booking.paymentMethod === 'vnpay' && booking.payments && (booking.payments.length== 0 || ( booking.payments[booking.payments.length - 1].paymentStatus!="paid")) && (
+                                        {booking.status === 'approved' && booking.paymentMethod === 'vnpay' && booking.payments && (booking.payments.length == 0 || (booking.payments[booking.payments.length - 1].paymentStatus != "paid")) && (
                                             <button
                                                 onClick={(e) => {
                                                     e.stopPropagation();
@@ -159,6 +169,17 @@ const BookingHistory = () => {
                                                 className="pay-button"
                                             >
                                                 Thanh toán
+                                            </button>
+                                        )}
+                                        {booking.status === 'pending' && (
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    cancelBooking(booking.bookingId, "cancel");
+                                                }}
+                                                className="cancel-button btn-danger"
+                                            >
+                                                Hủy đơn
                                             </button>
                                         )}
                                     </td>
@@ -183,7 +204,8 @@ const BookingHistory = () => {
                                                     <div key={item.service.serviceId} className="cart-item">
                                                         <img src={item.service.imageDemo} alt={item.service.title} />
                                                         <div className="cart-info">
-                                                            <p className="item-name">{item.service.title}</p>
+                                                            <p className="item-name">{item.bookingDetailId} - {item.service.title}</p>
+                                                            <p className='d-flex'>Trạng thái nhà cung cấp:<span className={`status-badge status-${item.status}`}>{item.status}</span></p>
                                                             <p className="item-price">{item.service.price.toLocaleString()} VND</p>
 
                                                         </div>
@@ -229,6 +251,7 @@ const BookingHistory = () => {
                     />
                 </>
             )}
+
         </div>
     );
 

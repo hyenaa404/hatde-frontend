@@ -27,8 +27,7 @@ const FeatureSection = () => {
                 <Badge bg="light" text="dark" className="position-absolute top-0 start-0 m-2">
                   {item.tag}
                 </Badge>
-                
-                <i className="bi bi-heart position-absolute top-0 end-0 m-2 text-danger fs-5 "></i>
+
               </div>
               <Card.Body>
                 <Card.Title className="fw-semibold">{item.title}</Card.Title>

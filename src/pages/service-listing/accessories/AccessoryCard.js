@@ -1,34 +1,45 @@
 import "../styles/accessory-card.css"
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../features/manage-cart/cartSlice";
 function AccessoryCard({ item }) {
   const dispatch = useDispatch();
-
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const handleAddToCart = (e, item) => {
     e.preventDefault();
-    alert("Added to cart! ")
-    dispatch(addToCart(item));
+    if (isAuthenticated) {
+      alert("Đã thêm vào giỏ hàng của bạn. ")
+      dispatch(addToCart(item));
+    } else {
+      alert("Vui lòng đăng nhập trước khi thêm vào giỏ hàng !")
+    }
   };
   return (
     <Link to={`/service-detail/${item.serviceId}`} className="folder-link">
-  <div className="decor-card">
-    <div className="card-image">
-      <img src={item.imageDemo} alt={item.title} />
-      <div className="card-icons">
-        <i className="bi bi-heart"></i>
-        <i onClick = {(e)=>{handleAddToCart(e, item)}}className="bi bi-cart"></i>
+      <div className="service-card">
+        <div className="service-image">
+          <img src={item.imageDemo} alt={item.title} />
+          <div className="category-label">{item.category || "Phụ kiện"}</div>
+        </div>
+        <div className="service-info">
+          <div className="title-price-row">
+            <h4>{item.title}</h4>
+            <div className="card-footer">
+              <span className="price">{item.price.toLocaleString()}₫</span>
+            </div>
+          </div>
+
+          <p className="location">Hà Nội</p>
+          <div className="rating">
+            ⭐  4.8 (102 reviews)
+          </div>
+          <p className="availability">Available from 2025-05-20</p>
+          <div className="bottom-row">
+            <button onClick={(e) => handleAddToCart(e, item)} className="btn-book">Đặt ngay</button>
+          </div>
+        </div>
       </div>
-    </div>
-    <div className="card-content">
-      <p className="category">Trang sức</p> 
-      <h4>{item.title}</h4>
-      <div className="card-footer">
-        <span className="price">{item.price.toLocaleString()}₫</span>
-      </div>
-    </div>
-  </div>
-  </Link>
-);
+    </Link>
+  );
 }
 export default AccessoryCard;

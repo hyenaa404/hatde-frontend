@@ -1,34 +1,40 @@
 
 export const categories = [
   {
-    title: 'Địa điểm',
+    id: 1,
+    title: 'Mâm quả cưới hỏi',
     subtitle: 'Find the perfect space for your celebration',
-    image: 'https://i.pinimg.com/736x/a1/8d/01/a18d010e762e2de95a11c076aaacc89d.jpg'
+    image: 'https://dichvucuoihoi.vn/wp-content/uploads/2024/07/Mam-qua-cuoi-hoi-tron-goi-trang-tri-dep-2.jpg'
   },
   {
-    title: 'Nhiếp ảnh',
+    id: 2,
+    title: 'Gia tiên',
     subtitle: 'Capture your special moments forever',
-    image: 'https://i.pinimg.com/736x/7d/2b/f8/7d2bf8ac67a7f6c6ca6fdcfb9bced193.jpg'
+    image: 'https://dichvucuoihoi.vn/wp-content/uploads/2024/01/Trang-tri-le-gia-tien-nha-trai-4.jpg'
   },
   {
-    title: 'Hoa & Trang trí',
+    id: 3,
+    title: 'Âm thanh',
     subtitle: 'Beautiful arrangements for any style',
-    image: 'https://i.pinimg.com/736x/d9/51/ce/d951ce443806291f031eebda7ee5ba15.jpg'
+    image: 'https://dichvucuoihoi.vn/wp-content/uploads/2023/04/Khong-gian-tiec-cuoi-tron-goi-ngoai-troi-2-1.jpg'
   },
   {
-    title: 'Trang điểm & Làm đẹp',
+    id: 4,
+    title: 'Xe cưới',
     subtitle: 'Look your best on your big day',
-    image: 'https://i.pinimg.com/736x/9d/1e/91/9d1e917e7a91eff99de0ff89999b2e04.jpg'
+    image: 'https://dichvucuoihoi.vn/wp-content/uploads/2023/03/Mau-xe-toyota-ket-hoa.jpg'
   },
   {
-    title: 'Kế hoạch',
+    id: 5,
+    title: 'Tiệc cưới',
     subtitle: 'Expert planners to coordinate every detail',
-    image: 'https://i.pinimg.com/736x/05/54/0b/05540ba5a57c17c4210fb9f03a25c796.jpg'
+    image: 'https://dichvucuoihoi.vn/wp-content/uploads/2025/05/Trang-tri-san-khau-loi-di-tiec-cuoi-phong-cach-co-dien.jpg'
   },
   {
-    title: 'Dịch vụ ăn uống',
+    id: 7,
+    title: 'Phụ kiện',
     subtitle: 'Delicious food and drink for your guests',
-    image: 'https://i.pinimg.com/736x/c7/bf/08/c7bf0883f0d76e81d6f2ad3ce96c19df.jpg'
+    image: 'https://dichvucuoihoi.vn/wp-content/uploads/2024/01/Tiec-cuoi-tren-dao-Nam-Du-144-1400x1050.jpg'
   },
 ];
 
@@ -77,7 +83,7 @@ export const features = [
 export const reviews = [
   {
     stars: 5,
-    content: 'Thật tuyệt vời, tôi có thể dễ dàng tìm kiếm và lập kế hoạch một cách rõ ràng về những thứ cần chuẩn bị cho đám cưới nhờ chuyên gia của trang wed này.',
+    content: 'Thật tuyệt vời, tôi có thể dễ dàng tìm kiếm và lập kế hoạch một cách rõ ràng cho đám cưới.',
     name: 'Sarah & Michael',
     avatar: 'https://i.pravatar.cc/50?img=1',
   },
@@ -94,4 +100,3 @@ export const reviews = [
     avatar: 'https://i.pravatar.cc/50?img=3',
   },
 ];
-

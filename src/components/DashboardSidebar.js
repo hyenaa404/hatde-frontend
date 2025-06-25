@@ -28,7 +28,7 @@ const VendorSidebar = () => {
     <>
       <div className="d-flex flex-column bg-white p-3 shadow-sm" style={{ width: "250px", minHeight: "100vh" }}>
         <div className="logo" style={{ marginBottom: "60px" }}>
-          <a href="../"><span className="logo-hat">Hat</span><span className="logo-de">De</span></a>
+          <a href="../"><span className="logo-hat">HD</span><span className="logo-de">Wedding & Events logo</span></a>
         </div>
 
         <ul className="nav flex-column mb-4">
@@ -47,17 +47,17 @@ const VendorSidebar = () => {
           ))}
         </ul>
         <div className="d-flex gap-2">
-        <div className="mt-4">
-                            <a href='../logout'>
-                                <button className="btn btn-link text-danger w-100 text-start">
-                                    <i className="bi bi-box-arrow-right me-2"></i> Đăng xuất
-                                </button>
-                            </a>
-                        </div>
+          <div className="mt-4">
+            <a href='../logout'>
+              <button className="btn btn-link text-danger w-100 text-start">
+                <i className="bi bi-box-arrow-right me-2"></i> Đăng xuất
+              </button>
+            </a>
+          </div>
+        </div>
+
       </div>
-        
-      </div>
-</>
+    </>
   );
 };
 
@@ -87,7 +87,7 @@ export const AdminSidebar = () => {
   return (
     <div className="d-flex flex-column bg-white p-3 shadow-sm" style={{ width: "250px", minHeight: "100vh" }}>
       <div className="logo" style={{ marginBottom: "60px" }}>
-        <a href="../"><span className="logo-hat">Hat</span><span className="logo-de">De</span></a>
+        <span className="logo-hat">HD</span><span className="logo-de">Wedding & Events logo</span>
       </div>
 
       <ul className="nav flex-column mb-4">
@@ -104,17 +104,17 @@ export const AdminSidebar = () => {
             </Link>
           </li>
         ))}
-        
+
       </ul>
 
       <div className="d-flex gap-2">
         <div className="mt-4">
-                            <a href='../logout'>
-                                <button className="btn btn-link text-danger w-100 text-start">
-                                    <i className="bi bi-box-arrow-right me-2"></i> Đăng xuất
-                                </button>
-                            </a>
-                        </div>
+          <a href='../logout'>
+            <button className="btn btn-link text-danger w-100 text-start">
+              <i className="bi bi-box-arrow-right me-2"></i> Đăng xuất
+            </button>
+          </a>
+        </div>
       </div>
     </div>
   );

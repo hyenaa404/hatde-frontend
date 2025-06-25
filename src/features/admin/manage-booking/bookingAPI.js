@@ -1,12 +1,22 @@
 import axiosInstance from "../../../services/axiosInstance";
 
+export const fetchBookingAdminAPI = () => {
+  return axiosInstance.get(`/Booking`, {
+    withCredentials: true,
+  });
+}
 
 
 
+export const fetchBookingAPI = (vendorId) => {
+  return axiosInstance.get(`/Vendor/BookingDetails/Vendor/${vendorId}`, {
+    withCredentials: true,
+  });
+}
 
-export const fetchBookingAPI = () => {
-  return axiosInstance.get(`/Booking/`, {
-    withCredentials: true, 
+export const changeBookingDetailStatusAPI = (bookingDetailId, status) => {
+  return axiosInstance.get(`/Vendor/ChangeStatus?bookingDetailId=${bookingDetailId}&status=${status}`, {
+    withCredentials: true,
   });
 }
 

@@ -28,22 +28,28 @@ export default function LoginForm() {
     if (!submitted) return;
     console.log("status: " + status)
     if (status === "succeeded") {
-      switch (user.role) {
-        case 'vendor':
-          navigate('/vendor/dashboard');
-          break;
-        case 'admin':
-          navigate('/admin/dashboard');
-          break;
-        case 'user':
-          navigate('/');
-          break;
-        default:
-          navigate('/');
+      if (user.status == "inactive") {
+        alert("Tài khoản của bạn chưa được kích hoạt");
+        return;
+      } else {
+        switch (user.role) {
+          case 'vendor':
+            navigate('/vendor/dashboard');
+            break;
+          case 'admin':
+            navigate('/admin/dashboard');
+            break;
+          case 'user':
+            navigate('/');
+            break;
+          default:
+            navigate('/');
+        }
       }
     } else if (status === "failed") {
-      console.log(error)
-      if (error === 401) alert("Wrong login information");
+      if (error === "inactive") {
+        alert("Tài khoản của bạn chưa được kích hoạt");
+      } else if (error === 401) alert("Wrong login information");
       else if (error === 404) alert("Account does not exist");
       else alert("Error happened");
     }
@@ -52,7 +58,7 @@ export default function LoginForm() {
   return (
     <div className="login-wrapper">
       <form className="login-form" onSubmit={handleLogin}>
-        <h3><span>Hat</span> De</h3>
+        <span className="logo-hat">HD</span><span className="logo-de">Wedding & Events logo</span>
         <h2>Đăng nhập để đặt hàng</h2>
         <h6>Vui lòng đăng nhập tài khoản của bạn</h6>
 

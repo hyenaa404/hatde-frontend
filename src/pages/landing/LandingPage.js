@@ -12,10 +12,10 @@ const LandingPage = () => {
   return (
     <>
       <HeroSection />
-      <CategorySection/>
-      <FeatureSection/>
-      <AboutSection/>
-      <ReviewSection/>
+      <CategorySection />
+      {/* <FeatureSection/> */}
+      <AboutSection />
+      <ReviewSection />
     </>
 
   )

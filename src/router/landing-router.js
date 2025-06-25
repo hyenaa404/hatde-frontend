@@ -47,9 +47,10 @@ export const router = createBrowserRouter([
       { index: true, element: <LandingPage /> },
       { path: 'register', element: <RegisterForm /> },
       { path: 'login', element: <LoginForm /> },
-      { path: 'wedding', element: <WeddingServices/> },
-      { path: 'accessory', element: <AccessoryServices/> },
-      { path: 'service-detail/:id', element: <ServiceDetail/> }
+      { path: 'wedding', element: <WeddingServices /> },
+      { path: 'wedding/category/:id', element: <WeddingServices /> },
+      { path: 'accessory', element: <AccessoryServices /> },
+      { path: 'service-detail/:id', element: <ServiceDetail /> }
     ]
   },
   {
@@ -65,33 +66,33 @@ export const router = createBrowserRouter([
       { path: 'payment', element: <PaymentPage /> },
       { path: 'transaction', element: <PaymentReturn /> },
 
-      
-      
-      
+
+
+
     ]
   },
   {
     path: '/',
     element: <PrivateVendorRoute><VendorDashboardLayout /></PrivateVendorRoute>,
     children: [
-      
-      
+
+
       { path: 'vendor/dashboard', element: <VendorDashboard /> },
       { path: 'vendor/bookings', element: <ViewBooking /> },
       { path: 'vendor/services', element: <ManageServices /> },
-      
+
     ]
   },
   {
     path: '/',
     element: <PrivateAdminRoute><AdminDashboardLayout /></PrivateAdminRoute>,
     children: [
-      
-      
+
+
       { path: 'admin/dashboard', element: <AdminDashboard /> },
       { path: 'admin/bookings', element: <BookingManage /> },
       { path: 'admin/users', element: <UserList /> },
-      
+
     ]
   }
 ]);

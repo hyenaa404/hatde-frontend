@@ -14,7 +14,7 @@ const BookingForm = () => {
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
     const orderItems = useSelector((state) => state.cart.items)
-
+    const [errors, setErrors] = useState({});
 
     const [submitted, setSubmitted] = useState(false)
 
@@ -35,6 +35,36 @@ const BookingForm = () => {
     const [provinces, setProvinces] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [wards, setWards] = useState([]);
+    const validateForm = () => {
+        const newErrors = {};
+
+        if (!form.name.trim()) newErrors.name = "Họ tên không được để trống.";
+        if (!form.phone.trim()) {
+            newErrors.phone = "Số điện thoại không được để trống.";
+        } else if (!/^0\d{9,10}$/.test(form.phone)) {
+            newErrors.phone = "Số điện thoại không hợp lệ.";
+        }
+
+        if (!form.eventDate) newErrors.eventDate = "Bạn phải chọn ngày tổ chức.";
+        if (!form.address.trim()) newErrors.address = "Địa chỉ không được để trống.";
+
+        if (!form.city) newErrors.city = "Vui lòng chọn tỉnh/thành phố.";
+        if (!form.district) newErrors.district = "Vui lòng chọn quận/huyện.";
+        if (!form.ward) newErrors.ward = "Vui lòng chọn phường/xã.";
+        if (!form.eventDate) {
+            newErrors.eventDate = "Bạn phải chọn ngày tổ chức.";
+        } else {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const selectedDate = new Date(form.eventDate);
+
+            if (selectedDate < today) {
+                newErrors.eventDate = "Ngày tổ chức không được nhỏ hơn ngày hôm nay.";
+            }
+        }
+
+        return newErrors;
+    };
 
     useEffect(() => {
         fetch("https://provinces.open-api.vn/api/?depth=1")
@@ -68,6 +98,12 @@ const BookingForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        const formErrors = validateForm();
+        setErrors(formErrors);
+
+        if (Object.keys(formErrors).length > 0) {
+            return;
+        }
         const selectedCity = provinces.find(p => p.code === Number(form.city));
         const selectedDistrict = districts.find(d => d.code === Number(form.district));
         const selectedWard = wards.find(w => w.code === Number(form.ward));
@@ -141,10 +177,12 @@ const BookingForm = () => {
                                 <div className="input-group">
                                     <label>Họ và tên</label>
                                     <input type="text" name="name" value={form.name} onChange={handleChange} required />
+                                    {errors.name && <span className="text-danger">{errors.name}</span>}
                                 </div>
                                 <div className="input-group">
                                     <label>Số điện thoại</label>
                                     <input type="text" name="phone" value={form.phone} onChange={handleChange} required />
+                                    {errors.phone && <span className="text-danger">{errors.phone}</span>}
                                 </div>
                             </div>
 
@@ -153,6 +191,7 @@ const BookingForm = () => {
                             <div className="input-group full">
                                 <label>Thời gian:</label>
                                 <input type="date" name="eventDate" value={form.eventDate} onChange={handleChange} required />
+                                {errors.eventDate && <span className="text-danger">{errors.eventDate}</span>}
                             </div>
 
                             <div className="input-group full">
@@ -163,6 +202,7 @@ const BookingForm = () => {
                             <div className="input-group full">
                                 <label>Địa chỉ</label>
                                 <input type="text" name="address" value={form.address} onChange={handleChange} required />
+                                {errors.address && <span className="text-danger">{errors.address}</span>}
                             </div>
 
                             <div className="row">
@@ -219,6 +259,7 @@ const BookingForm = () => {
                                     />
                                     <label>Chuyển khoản ngân hàng</label>
                                 </div>
+                                {errors.paymentMethod && <span className="text-danger">{errors.paymentMethod}</span>}
                             </div>
                         </div>
 

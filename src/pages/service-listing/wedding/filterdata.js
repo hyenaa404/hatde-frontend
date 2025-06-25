@@ -25,12 +25,5 @@ export const ratingOptions = [
 ];
 
 export const categories = [
-  'Địa điểm',
-  'Chụp Ảnh',
-  'Dịch vụ ăn uống',
-  'Lên kế hoạch',
-  'Hoa trang trí',
-  'Âm nhạc',
-  'Làm đẹp',
-  'Trang trí',
+
 ];

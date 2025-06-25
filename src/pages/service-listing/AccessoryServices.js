@@ -10,13 +10,13 @@ function AccessoryServices() {
   const [accessoryService, setAccessoryServices] = useState([]);
 
   useEffect(() => {
-  const fetchData = async () => {
+    const fetchData = async () => {
       const weddingServices = await getAccessoryServices();
-      setAccessoryServices(weddingServices); 
-  };
+      setAccessoryServices(weddingServices);
+    };
 
-  fetchData();
-}, []);
+    fetchData();
+  }, []);
 
   const itemsPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,8 +28,9 @@ function AccessoryServices() {
     <>
       <div className="header-section">
         <h2>Tất cả các phụ kiện ở đây</h2><br />
-        <p>Tìm kiếm những sản phẩm cần thiết cho đám cưới của bạn</p>
-        <SearchBar />
+        <p>Hô biến ngày cưới mơ ước thành hiện thực chỉ với vài cú click!
+          Mô tả phụ: Mọi dịch vụ bạn cần cho ngày cưới đều ở đây — book lẹ tay, yêu thêm say!</p>
+        {/* <SearchBar /> */}
       </div>
       <div className="stores-content">
         <main className="main-content">

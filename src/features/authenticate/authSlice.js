@@ -11,6 +11,9 @@ const authSlice = createSlice({
             console.log("reducer: ", state.isAuthenticated)
             state.status = "idle";
             state.error = null;
+        },
+        setUser: (state, action) => {
+            state.user = action.payload;
         }
     },           // handle change in local UI
     // extraReducer + createAsyncThunk: handle download from/ upload to server
@@ -21,10 +24,19 @@ const authSlice = createSlice({
                 state.status = "loading";
             })
             .addCase(login.fulfilled, (state, action) => {
-                state.status = "succeeded";
-                state.user = action.payload.data;
-                state.isAuthenticated = true;
-                state.error = null;
+                const user = action.payload.data;
+                if (user.status == "active") {
+                    state.status = "succeeded";
+                    state.user = action.payload.data;
+                    state.isAuthenticated = true;
+                    state.error = null;
+                } else {
+                    state.status = "failed";
+                    state.error = "inactive";
+                    state.user = null;
+                    state.isAuthenticated = false;
+                    return;
+                }
                 // localStorage.setItem("user", JSON.stringify(state.user));
 
                 // console.log(action.payload.data)
@@ -50,26 +62,26 @@ const authSlice = createSlice({
                 state.status = "failed";
             })
 
-            //logout action
-            // .addCase(logout.pending, (state) => {
-            //     state.status = "loading";
-            // })
-            // .addCase(logout.fulfilled, (state, action) => {
-            //     state.status = "succeeded";
-            //     state.isAuthenticated = false;
-            //     state.user = null;
-            //     state.error = null;
-            //     console.log("success : " + action.payload)
-            // })
-            // .addCase(logout.rejected, (state, err) => {
-            //     state.status = "failed"
-            //     console.log("error code: " + err)
-            // })
+        //logout action
+        // .addCase(logout.pending, (state) => {
+        //     state.status = "loading";
+        // })
+        // .addCase(logout.fulfilled, (state, action) => {
+        //     state.status = "succeeded";
+        //     state.isAuthenticated = false;
+        //     state.user = null;
+        //     state.error = null;
+        //     console.log("success : " + action.payload)
+        // })
+        // .addCase(logout.rejected, (state, err) => {
+        //     state.status = "failed"
+        //     console.log("error code: " + err)
+        // })
 
-            
-            
+
+
     },
 });
-export const { logout } = authSlice.actions;
+export const { logout, setUser } = authSlice.actions;
 
 export default authSlice.reducer

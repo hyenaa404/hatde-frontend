@@ -4,6 +4,11 @@ export const weddingServiceAPI = () => {
     withCredentials: true,
   });
 }
+export const weddingServiceByCategoryAPI = (id) => {
+  return axiosInstance.get("/ServiceCategory/Service/" + id, {
+    withCredentials: true,
+  });
+}
 
 export const getServiceByIdAPI = (id) => {
   return axiosInstance.get(`/Service/${id}`, {

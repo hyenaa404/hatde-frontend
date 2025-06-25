@@ -7,7 +7,7 @@ function CategoryFilter() {
 
   return (
     <div className="category-filter">
-      <button
+      {/* <button
         className={`category-btn ${active === 'All' ? 'active' : ''}`}
         onClick={() => setActive('All')}
       >
@@ -21,7 +21,7 @@ function CategoryFilter() {
         >
           {cat}
         </button>
-      ))}
+      ))} */}
     </div>
   );
 }

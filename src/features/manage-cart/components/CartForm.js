@@ -67,7 +67,7 @@ const CartForm = () => {
                       <img src={item.imageDemo} alt={item.title} />
                       <div className="cart-info">
                         <p className="item-name">{item.title}</p>
-                        <p className="item-price">{item.price.toLocaleString()} VND</p>
+                        <p className="item-price">{item.price && item.price.toLocaleString()} VND</p>
 
                       </div>
                       <button className="delete-btn" onClick={(e) => removeItem(e, item.serviceId)}>🗑️</button>
@@ -78,7 +78,7 @@ const CartForm = () => {
                 <div className="cart-summary">
                   <div className="summary-row">
                     <span>Tổng cộng</span>
-                    <span>{total.toLocaleString()} VND</span>
+                    <span>{total && total.toLocaleString()} VND</span>
                   </div>
                   <div className="summary-row">
                     <span>Phí vận chuyển</span>
@@ -86,7 +86,7 @@ const CartForm = () => {
                   </div>
                   <div className="summary-row total">
                     <strong>Tổng chi phí</strong>
-                    <strong>{total.toLocaleString()} VND</strong>
+                    <strong>{total && total.toLocaleString()} VND</strong>
                   </div>
                   <button onClick={() => { handleSubmit() }} className="checkout-btn">Tiến hành thanh toán</button>
                 </div>

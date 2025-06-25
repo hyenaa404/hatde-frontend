@@ -1,16 +1,21 @@
 import React from "react";
 import "../styles/wedding-card.css";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../features/manage-cart/cartSlice";
 
 function WeddingCard({ service }) {
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   const handleAddToCart = (e, service) => {
     e.preventDefault();
-    alert("Added to cart! ")
-    dispatch(addToCart(service));
+    if (isAuthenticated) {
+      alert("Đã thêm vào giỏ hàng của bạn. ")
+      dispatch(addToCart(service));
+    } else {
+      alert("Vui lòng đăng nhập trước khi thêm vào giỏ hàng !")
+    }
   };
   return (
     <Link to={`/service-detail/${service.serviceId}`} className="folder-link">
@@ -31,14 +36,13 @@ function WeddingCard({ service }) {
             </div>
           </div>
 
-          <p className="location">Hà Nội</p>
+          <p className="location">{service.address}</p>
           <div className="rating">
             ⭐  4.8 (102 reviews)
           </div>
           <p className="availability">Available from 2025-05-20</p>
           <div className="bottom-row">
-            <button onClick={(e)=>handleAddToCart(e, service)} className="btn-book">Đặt ngay</button>
-            <p className="learn-more">Learn More</p>
+            <button onClick={(e) => handleAddToCart(e, service)} className="btn-book">Đặt ngay</button>
           </div>
         </div>
       </div>

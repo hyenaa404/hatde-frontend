@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Pagination from '../../../components/common/Pagination';
-import { fetchBookings, updateBooking, fetchBookingDetail } from './bookingServices'
+import { fetchBookings, updateBooking, fetchBookingDetail, fetchBookingsAdmin } from './bookingServices'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,14 +16,14 @@ export const BookingManage = () => {
     // const [sortedBookings, setSortedBookings] = useState([]);
 
 
-    const TABS = ['all', 'pending', 'approved', 'prepare', 'completed', 'cancel'];
+    const TABS = ['all', 'pending', 'approved', 'preparing', 'completed', 'cancel'];
 
     const [filteredBookings, setFilteredBookings] = useState([]);
     const [activeTab, setActiveTab] = useState('all');
     const fetchAndSort = async () => {
         try {
-            const data = await fetchBookings(user.id);
-            // setBookings(data);
+            const data = await fetchBookingsAdmin();
+            console.log(data);
             setFetchStatus(true)
             var sorted = [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             // sorted = sorted.map(booking => ({ ...booking, status: "approved" }));
@@ -171,17 +171,16 @@ export const BookingManage = () => {
                                     <td>{Number(booking.totalPrice).toLocaleString()} VND</td>
                                     <td>
                                         {(() => {
-                                            const action = getNextAction(booking.status);
-                                            if (action) {
+                                            if (booking.status == 'pending') {
                                                 return (
                                                     <button
                                                         onClick={(e) => {
                                                             e.stopPropagation();
-                                                            handleUpdate(booking.bookingId, action.nextStatus);
+                                                            handleUpdate(booking.bookingId, 'approved');
                                                         }}
                                                         className="pay-button"
                                                     >
-                                                        {action.label}
+                                                        Approve
                                                     </button>
 
                                                 );

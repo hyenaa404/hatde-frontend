@@ -6,8 +6,8 @@ const HeroSection = () => {
         <div className="hero-content">
           <h1>Mọi thứ bạn cần cho<br />Đám cưới hoàn hảo của bạn</h1>
           <p>
-            Khám phá, đặt và mua tất cả các vật dụng cần thiết cho đám<br />
-            cưới của bạn tại một nơi
+            Để ngày hạnh phúc rực rỡ từng góc nhỏ — Tất tần tật phụ kiện & dịch vụ cưới, sẵn sàng bên bạn!
+            Mô tả phụ: Một điểm đến, vạn điều tinh tế!
           </p>
           <div className="hero-buttons">
             <button className="btn banner-btn primary">Tìm dịch vụ</button>

@@ -79,7 +79,7 @@ export default function RegisterForm() {
   return (
     <div className="register-wrapper">
       <form className="register-form" onSubmit={handleRegister}>
-        <h3><span>Hat</span> De</h3>
+        <span className="logo-hat">HD</span><span className="logo-de">Wedding & Events logo</span>
         <h2>Tạo tài khoản</h2>
         <h6>Tham gia cộng đồng dịch vụ tiệc cưới</h6>
 

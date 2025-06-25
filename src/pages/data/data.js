@@ -1,4 +1,4 @@
-import { weddingServiceAPI, accessoryServiceAPI,  getServiceByIdAPI } from "./serviceAPI";
+import { weddingServiceAPI, accessoryServiceAPI, getServiceByIdAPI, weddingServiceByCategoryAPI } from "./serviceAPI";
 
 
 export const getWeddingServices = async () => {
@@ -7,10 +7,18 @@ export const getWeddingServices = async () => {
     return response.data;
   } catch (error) {
     console.error("Error fetching wedding services:", error);
-    throw error; 
+    throw error;
   }
 };
-
+export const getWeddingServicesByCategoryIdAsync = async (id) => {
+  try {
+    const response = await weddingServiceByCategoryAPI(id);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching wedding services:", error);
+    throw error;
+  }
+};
 export const getServiceById = async (id) => {
   try {
     const response = await getServiceByIdAPI(id);
@@ -18,7 +26,7 @@ export const getServiceById = async (id) => {
     return response.data;
   } catch (error) {
     console.error("Error fetching wedding services:", error);
-    throw error; 
+    throw error;
   }
 };
 
@@ -28,7 +36,7 @@ export const getAccessoryServices = async () => {
     return response.data;
   } catch (error) {
     console.error("Error fetching accessory services:", error);
-    throw error; 
+    throw error;
   }
 };
 

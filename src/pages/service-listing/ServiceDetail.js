@@ -7,17 +7,21 @@ import { getServiceById } from "../data/data";
 import { addToCart } from "../../features/manage-cart/cartSlice";
 
 function ServiceDetail() {
-  const {id} = useParams();
+  const { id } = useParams();
 
   const [service, setService] = useState([]);
-
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
-  
-    const handleAddToCart = (e, service) => {
-      e.preventDefault();
-      alert("Added to cart! ")
+
+  const handleAddToCart = (e, service) => {
+    e.preventDefault();
+    if (isAuthenticated) {
+      alert("Đã thêm vào giỏ hàng của bạn. ")
       dispatch(addToCart(service));
-    };
+    } else {
+      alert("Vui lòng đăng nhập trước khi thêm vào giỏ hàng !")
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,8 +65,7 @@ function ServiceDetail() {
           </div>
 
           <div className="service-actions">
-            <button onClick={(e)=>handleAddToCart(e, service)} className="btn-primary">Đặt dịch vụ</button>
-            <button className="btn-outline">❤️</button>
+            <button onClick={(e) => handleAddToCart(e, service)} className="btn-primary">Đặt dịch vụ</button>
           </div>
         </div>
       </div>

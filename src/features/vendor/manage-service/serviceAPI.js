@@ -18,13 +18,14 @@ export const addServiceAPI = (data) => {
         description: data.description,
         price: data.price,
         imageDemo: data.imageDemo,
+        address: data.address
     }, {
         withCredentials: true
     })
 }
 
 export const deleteServiceAPI = (id) => {
-  return axiosInstance.delete(`/Service/delete/${id}`);
+    return axiosInstance.delete(`/Service/delete/${id}`);
 };
 
 
@@ -37,6 +38,7 @@ export const updateServiceAPI = (data) => {
         description: data.description,
         price: data.price,
         imageDemo: data.imageDemo,
+        address: data.address
     }, {
         withCredentials: true
     })

@@ -3,83 +3,82 @@ import '../../styles/common/footer.css';
 
 const Footer = () => {
   return (
-    
-<footer className="footer">
-  <div className="footer-container">
-    {/* <!-- Logo + Description --> */}
-    <div className="footer-column logo-column">
-      <h2 className="logo-text">Hat <span>De</span></h2>
-      <p className="desc">
-        Your one-stop destination for all wedding services and products. Making wedding planning simpler, more enjoyable, and stress-free.
-      </p>
-      <div className="social-icons">
-        <i className="fab fa-instagram"></i>
-        <i className="fab fa-facebook-f"></i>
-        <i className="fab fa-twitter"></i>
-        <i className="fab fa-youtube"></i>
+    <footer className="footer">
+      <div className="footer-container">
+        {/* Logo + Mô tả */}
+        <div className="footer-column logo-column">
+          <h2 className="logo-text">Hat <span>De</span></h2>
+          <p className="desc">
+            Nơi cung cấp đầy đủ dịch vụ và sản phẩm cưới hỏi. Giúp việc chuẩn bị đám cưới trở nên dễ dàng, thú vị và không áp lực.
+          </p>
+          <div className="social-icons">
+            <i className="fab fa-instagram"></i>
+            <i className="fab fa-facebook-f"></i>
+            <i className="fab fa-twitter"></i>
+            <i className="fab fa-youtube"></i>
+          </div>
+        </div>
+
+        {/* Dịch vụ */}
+        <div className="footer-column">
+          <h3>Dịch vụ</h3>
+          <ul>
+            <li>Địa điểm tổ chức</li>
+            <li>Chụp ảnh cưới</li>
+            <li>Ẩm thực & Tiệc cưới</li>
+            <li>Trang điểm & Làm đẹp</li>
+            <li>Lên kế hoạch cưới</li>
+          </ul>
+        </div>
+
+        {/* Mua sắm */}
+        <div className="footer-column">
+          <h3>Mua sắm</h3>
+          <ul>
+            <li>Váy cưới</li>
+            <li>Vest & Áo dài</li>
+            <li>Trang trí</li>
+            <li>Thiệp mời</li>
+            <li>Quà tặng & Lưu niệm</li>
+          </ul>
+        </div>
+
+        {/* Công ty */}
+        <div className="footer-column">
+          <h3>Về chúng tôi</h3>
+          <ul>
+            <li>Giới thiệu</li>
+            <li>Trở thành đối tác</li>
+            <li>Blog</li>
+            <li>Liên hệ</li>
+            <li>Trung tâm trợ giúp</li>
+          </ul>
+        </div>
       </div>
-    </div>
 
-    {/* <!-- Services --> */}
-    <div className="footer-column">
-      <h3>Services</h3>
-      <ul>
-        <li>Venues</li>
-        <li>Photography</li>
-        <li>Catering</li>
-        <li>Beauty & Makeup</li>
-        <li>Wedding Planning</li>
-      </ul>
-    </div>
+      {/* Đăng ký nhận tin */}
+      <div className="newsletter">
+        <div>
+          <h3>Đăng ký nhận bản tin</h3>
+          <p>Nhận cảm hứng cưới và ưu đãi đặc biệt</p>
+        </div>
+        <form className="newsletter-form">
+          <input type="email" placeholder="Địa chỉ email của bạn" required />
+          <button type="submit">Đăng ký</button>
+        </form>
+      </div>
 
-    {/* <!-- Shop --> */}
-    <div className="footer-column">
-      <h3>Shop</h3>
-      <ul>
-        <li>Dresses</li>
-        <li>Suits & Tuxedos</li>
-        <li>Decorations</li>
-        <li>Invitations</li>
-        <li>Gifts & Favors</li>
-      </ul>
-    </div>
-
-    {/* <!-- Company --> */}
-    <div className="footer-column">
-      <h3>Company</h3>
-      <ul>
-        <li>About Us</li>
-        <li>Become a Vendor</li>
-        <li>Blog</li>
-        <li>Contact</li>
-        <li>Help Center</li>
-      </ul>
-    </div>
-  </div>
-
-  {/* <!-- Newsletter --> */}
-  <div className="newsletter">
-    <div>
-    <h3>Subscribe to our newsletter</h3>
-    <p>Get wedding inspiration and special offers</p>
-    </div>
-    <form className="newsletter-form">
-      <input type="email" placeholder="Your email address" required />
-      <button type="submit">Subscribe</button>
-    </form>
-  </div>
-
-  {/* <!-- Footer bottom --> */}
-  <div className="footer-bottom">
-    <p>© 2025 Hat De. All rights reserved.</p>
-    <div className="footer-links">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms of Service</a>
-      <a href="#">Cookie Policy</a>
-    </div>
-  </div>
-</footer>
-  )
+      {/* Dưới chân trang */}
+      <div className="footer-bottom">
+        <p>© 2025 Hat De. Đã đăng ký bản quyền.</p>
+        <div className="footer-links">
+          <a href="#">Chính sách bảo mật</a>
+          <a href="#">Điều khoản dịch vụ</a>
+          <a href="#">Chính sách Cookie</a>
+        </div>
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;
