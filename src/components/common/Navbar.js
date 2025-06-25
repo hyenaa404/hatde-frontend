@@ -1,25 +1,31 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../styles/common/navbar.css';
 
 
 export const LandingNavbar = () => {
+  const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchValue.trim()) {
+      navigate(`/wedding?search=${encodeURIComponent(searchValue.trim())}`);
+      setSearchValue("");
+    }
+  };
+
   return (
     <header className="main-header">
       <div className="logo">
-        <span className="logo-hat">HD</span><span className="logo-de">Wedding & Events logo</span>
+        <span className="logo-hat">HD</span><span className="logo-de">Wedding & Events </span>
       </div>
 
       <nav className="nav-menu">
         <a href="../">Trang chủ</a>
         <a href="../wedding">Dịch vụ</a>
-        <a href="../accessory">Phụ kiện trang trí</a>
+        <a href="../accessory">Phụ kiện cưới</a>
       </nav>
-
-      <div className="search-bar">
-        <i className="fas fa-search"></i>
-        <input type="text" placeholder="Tìm kiếm..." />
-      </div>
 
       <div className="nav-button">
         {/* <i className="fas fa-user"></i> */}
@@ -37,21 +43,15 @@ export const HomeNavbar = () => {
   return (
     <header className="main-header">
       <div className="logo">
-        <span className="logo-hat">HD</span><span className="logo-de">Wedding & Events logo</span>
+        <span className="logo-hat">HD</span><span className="logo-de">Wedding & Events</span>
       </div>
 
       <nav className="nav-menu">
 
         <a href="../">Trang chủ</a>
         <a href="../wedding">Dịch vụ</a>
-        <a href="../accessory">Phụ kiện trang trí</a>
+        <a href="../accessory">Phụ kiện cưới</a>
       </nav>
-
-
-      <div className="search-bar">
-        <i className="fas fa-search"></i>
-        <input type="text" placeholder="Tìm kiếm..." />
-      </div>
 
       <div className="nav-icons">
         <a href="../cart"><i className="fas fa-shopping-cart"></i></a>
@@ -68,7 +68,7 @@ export const VendorDashboardNavbar = () => {
   return (
     <header className="main-header">
       <div className="logo">
-        <span className="logo-hat">HD</span><span className="logo-de">Wedding & Events logo</span>
+        <span className="logo-hat">HD</span><span className="logo-de">Wedding & Events</span>
       </div>
 
       <nav className="nav-menu">
@@ -98,7 +98,7 @@ export const AdminDashboardNavbar = () => {
   return (
     <header className="main-header">
       <div className="logo">
-        <span className="logo-hat">HD</span><span className="logo-de">Wedding & Events logo</span>
+        <span className="logo-hat">HD</span><span className="logo-de">Wedding & Events</span>
       </div>
 
       <nav className="nav-menu">

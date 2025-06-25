@@ -24,23 +24,25 @@ function WeddingCard({ service }) {
           <img src={service.imageDemo} alt={service.title} />
           <div className="category-label">{service.category || "Dịch vụ cưới"}</div>
         </div>
-        <div className="service-info">
-          <div className="title-price-row">
-            <h4>{service.title}</h4>
+        <div className="service-info d-flex flex-column justify-content-between">
+          <div>
+            <div className="title-price-row">
+              <h4 className="service-card-title">{service.title}</h4>
 
-            <div className="price-group">
-              <span className="price">
-                From <b>{service.price.toLocaleString()}₫</b>
-              </span>
-              <span className="per-event">per event</span>
+              <div className="price-group">
+                <span className="price">
+                  Từ <b>{service.price.toLocaleString()}₫</b>
+                </span>
+                <span className="per-event">per event</span>
+              </div>
             </div>
-          </div>
 
-          <p className="location">{service.address}</p>
-          <div className="rating">
-            ⭐  4.8 (102 reviews)
+            <p className="location">{service.address}</p>
+            <div className="rating">
+              ⭐  4.8 (102 reviews)
+            </div>
+            <p className="availability">Có sẵn từ 2025-05-20</p>
           </div>
-          <p className="availability">Available from 2025-05-20</p>
           <div className="bottom-row">
             <button onClick={(e) => handleAddToCart(e, service)} className="btn-book">Đặt ngay</button>
           </div>

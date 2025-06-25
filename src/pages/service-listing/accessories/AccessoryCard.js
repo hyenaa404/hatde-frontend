@@ -21,19 +21,21 @@ function AccessoryCard({ item }) {
           <img src={item.imageDemo} alt={item.title} />
           <div className="category-label">{item.category || "Phụ kiện"}</div>
         </div>
-        <div className="service-info">
-          <div className="title-price-row">
-            <h4>{item.title}</h4>
-            <div className="card-footer">
-              <span className="price">{item.price.toLocaleString()}₫</span>
+        <div className="service-info d-flex flex-column justify-content-between">
+          <div>
+            <div className="title-price-row">
+              <h4 className="accessory-card-title">{item.title}</h4>
+              <div className="card-footer">
+                <span className="price">{item.price.toLocaleString()}₫</span>
+              </div>
             </div>
-          </div>
 
-          <p className="location">Hà Nội</p>
-          <div className="rating">
-            ⭐  4.8 (102 reviews)
+            <p className="location">Hà Nội</p>
+            <div className="rating">
+              ⭐  4.8 (102 reviews)
+            </div>
+            <p className="availability">Có sẵn từ 2025-05-20</p>
           </div>
-          <p className="availability">Available from 2025-05-20</p>
           <div className="bottom-row">
             <button onClick={(e) => handleAddToCart(e, item)} className="btn-book">Đặt ngay</button>
           </div>

@@ -13,15 +13,14 @@ function WeddingServices() {
   const [allProvinces, setAllProvinces] = useState([]);
   const [visibleProvinces, setVisibleProvinces] = useState([]);
   const [provinceFilter, setProvinceFilter] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchServiceTerm, setSearchServiceTerm] = useState("");
 
   const [weddingServices, setWeddingServices] = useState([]);
   const [selectedPriceRanges, setSelectedPriceRanges] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const itemsPerPage = 8;
 
   // Fetch wedding services + provinces
   useEffect(() => {
@@ -57,7 +56,7 @@ function WeddingServices() {
   // Handle search for provinces
   const handleSearchProvince = (e) => {
     const term = e.target.value.toLowerCase();
-    setSearchTerm(term);
+    // setSearchTerm(term); // Không dùng searchTerm này nữa
 
     const filtered = allProvinces.filter((prov) =>
       prov.name.toLowerCase().includes(term)
@@ -108,15 +107,16 @@ function WeddingServices() {
     });
   };
 
+  // Lọc theo từ khóa nhập liệu cục bộ
   const filteredServices = filterByProvince(
     filterByPriceRange(
       filterByCategory(weddingServices, selectedCategories),
       selectedPriceRanges
     ),
     provinceFilter
+  ).filter(service =>
+    service.title.toLowerCase().includes(searchServiceTerm.toLowerCase())
   );
-
-
 
   const totalPages = Math.ceil(filteredServices.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -143,20 +143,28 @@ function WeddingServices() {
           setProvinceFilter={setProvinceFilter}
           handleSearchProvince={handleSearchProvince}
           handleLoadMoreProvinces={handleLoadMoreProvinces}
-          searchTerm={searchTerm}
+          searchTerm={searchServiceTerm}
           selectedCategories={selectedCategories}
           setSelectedCategories={setSelectedCategories}
         />
 
         <main className="main-content">
-          <div className="header-bar">
-            <div>
-              View: <i className="bi bi-grid-fill"></i>{" "}
-              <i className="bi bi-list"></i>
-            </div>
-            <div>
-              Sort by: <select><option>Featured</option></select>
-            </div>
+          {/* Thanh tìm kiếm ngay trên danh sách dịch vụ */}
+          <div className="mb-3 d-flex justify-content-end align-items-center" style={{ position: 'relative' }}>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Tìm kiếm tên dịch vụ..."
+              value={searchServiceTerm}
+              onChange={e => {
+                setSearchServiceTerm(e.target.value);
+                setCurrentPage(1);
+              }}
+              style={{ maxWidth: 350, paddingLeft: 12, paddingRight: 32 }}
+            />
+            <span style={{ position: 'absolute', right: 6, top: '50%', transform: 'translateY(-50%)', color: '#aaa', pointerEvents: 'none', fontSize: 18 }}>
+              <i className="bi bi-search"></i>
+            </span>
           </div>
 
           <div className="store-grid">

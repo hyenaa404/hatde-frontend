@@ -1,4 +1,3 @@
-
 /* ----------------Feature Section------------- */
 
 
@@ -28,7 +27,7 @@
   object-fit: cover;
 }
 
-.card-title {
+.feature-card-title {
   display: -webkit-box;
   -webkit-line-clamp: 2;       /* Giới hạn 2 dòng */
   -webkit-box-orient: vertical;

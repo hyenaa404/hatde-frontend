@@ -1,3 +1,17 @@
+.accessory-card-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 2.4em;
+  margin-bottom: 8px;
+}
+
+.service-card {
+  height: 100%;
+}
+
 .decor-card {
   width: 100%;
   max-width: 320px;

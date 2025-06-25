@@ -6,8 +6,7 @@ import { updateService, deleteService } from "./serviceService";
 import { useState } from "react";
 import { uploadToCloudinary } from '../../../services/cloudinaryConfig'
 
-function ServiceCard({ service, fetchServices }) {
-    const [isEditing, setIsEditing] = useState(false);
+function ServiceCard({ service, isEditing, onEdit, onSave, onCancel }) {
     const [formData, setFormData] = useState({
         serviceId: service.serviceId,
         vendorId: service.vendorId,
@@ -24,15 +23,11 @@ function ServiceCard({ service, fetchServices }) {
         const file = e.target.files[0];
         setImageFile(file);
     };
-    const handleEdit = () => {
-        setIsEditing(true);
-    };
 
-    const handleDelete = async(service) => {
+    const handleDelete = async (service) => {
         if (window.confirm('Are you sure you want to delete this service?')) {
-            await deleteService(service.serviceId)
-
-            fetchServices()
+            await deleteService(service.serviceId);
+            onSave();
         }
     };
 
@@ -47,7 +42,6 @@ function ServiceCard({ service, fetchServices }) {
         try {
             let imageUrl = formData.imageDemo;
 
-
             if (imageFile) {
                 setUploading(true);
                 imageUrl = await uploadToCloudinary(imageFile);
@@ -61,12 +55,10 @@ function ServiceCard({ service, fetchServices }) {
             });
 
             alert("Cập nhật thành công!");
-            setIsEditing(false);
-            fetchServices()
+            onSave();
         } catch (err) {
             alert("Lỗi khi cập nhật");
-
-            setIsEditing(false);
+            onCancel();
         }
     };
 
@@ -74,15 +66,14 @@ function ServiceCard({ service, fetchServices }) {
         <div className="service-card">
             <div className="service-image">
                 <img src={service.imageDemo} alt={service.title} />
-
                 <div className="category-label">{service.category || "Dịch vụ cưới"}</div>
-
             </div>
 
             <div className="service-info">
                 {isEditing && (
                     <div>
-                        <input type="file" accept="image/*" onChange={handleFileChange} /></div>
+                        <input type="file" accept="image/*" onChange={handleFileChange} />
+                    </div>
                 )}
                 <div className="title-price-row">
                     {isEditing ? (
@@ -105,7 +96,7 @@ function ServiceCard({ service, fetchServices }) {
                             <h4>{service.title}</h4>
                             <div className="price-group">
                                 <span className="price">
-                                    From <b>{service.price.toLocaleString()}₫</b>
+                                    Từ <b>{service.price.toLocaleString()}₫</b>
                                 </span>
                                 <span className="per-event">per event</span>
                             </div>
@@ -124,26 +115,26 @@ function ServiceCard({ service, fetchServices }) {
                 )}
 
                 <div className="wrap-div">
-                    <p className="availability">Available from 2025-05-20</p>
+                    <p className="availability">Có sẵn từ 2025-05-20</p>
                     <a
                         href={`/service-detail/${service.serviceId}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="folder-link"
                     >
-                        <p className="location pink">View detail</p>
+                        <p className="location pink">Xem chi tiết</p>
                     </a>
                 </div>
                 <div className="actions">
                     {isEditing ? (
                         <>
-                            <button onClick={handleSave} className="edit-btn">Save</button>
-                            <button onClick={() => setIsEditing(false)} className="delete-btn">Cancel</button>
+                            <button onClick={handleSave} className="edit-btn">Lưu</button>
+                            <button onClick={onCancel} className="delete-btn">Hủy</button>
                         </>
                     ) : (
                         <>
-                            <button onClick={handleEdit} className="edit-btn">Edit</button>
-                            <button onClick={() => handleDelete(service)} className="delete-btn">Delete</button>
+                            <button onClick={() => onEdit(service.serviceId)} className="edit-btn">Sửa</button>
+                            <button onClick={() => handleDelete(service)} className="delete-btn">Xóa</button>
                         </>
                     )}
                 </div>
@@ -152,4 +143,4 @@ function ServiceCard({ service, fetchServices }) {
     );
 }
 
-export default ServiceCard
+export default ServiceCard;

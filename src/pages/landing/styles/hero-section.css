@@ -19,7 +19,7 @@
   position: relative;
   z-index: 2;
   height: 100%;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
   display: flex;
@@ -36,7 +36,7 @@
 }
 
 .hero-content p {
-  font-size: 16px;
+  font-size: 25px;
   line-height: 1.6;
   margin-bottom: 30px;
   color: #f0f0f0;

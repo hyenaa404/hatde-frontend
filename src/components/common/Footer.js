@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="footer-container">
         {/* Logo + Mô tả */}
         <div className="footer-column logo-column">
-          <h2 className="logo-text">Hat <span>De</span></h2>
+        <span className="logo-hat">HD</span><span className="logo-de">Wedding & Events </span>
           <p className="desc">
             Nơi cung cấp đầy đủ dịch vụ và sản phẩm cưới hỏi. Giúp việc chuẩn bị đám cưới trở nên dễ dàng, thú vị và không áp lực.
           </p>

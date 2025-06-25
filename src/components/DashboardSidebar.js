@@ -11,11 +11,11 @@ const VendorSidebar = () => {
   const [active, setActive] = useState("dashboard");
 
   const menuItems = [
-    { id: "dashboard", label: "Dashboard", icon: <FaHome />, path: "/vendor/dashboard" },
-    { id: "users", label: "Services", icon: <FaUsers />, path: "/vendor/services" },
-    { id: "orders", label: "Bookings", icon: <FaClipboardList />, path: "/vendor/bookings" },
-    { id: "reports", label: "Reports", icon: <FaChartBar />, path: "/vendor/dashboard" },
-    { id: "settings", label: "Settings", icon: <FaCog />, path: "/vendor/settings" },
+    { id: "dashboard", label: "Bảng điều khiển", icon: <FaHome />, path: "/vendor/dashboard" },
+    { id: "users", label: "Dịch vụ", icon: <FaUsers />, path: "/vendor/services" },
+    { id: "orders", label: "Đơn đặt hàng", icon: <FaClipboardList />, path: "/vendor/bookings" },
+    { id: "reports", label: "Báo cáo", icon: <FaChartBar />, path: "/vendor/dashboard" },
+    { id: "settings", label: "Cài đặt", icon: <FaCog />, path: "/profile" },
   ];
 
   useEffect(() => {
@@ -28,20 +28,20 @@ const VendorSidebar = () => {
     <>
       <div className="d-flex flex-column bg-white p-3 shadow-sm" style={{ width: "250px", minHeight: "100vh" }}>
         <div className="logo" style={{ marginBottom: "60px" }}>
-          <a href="../"><span className="logo-hat">HD</span><span className="logo-de">Wedding & Events logo</span></a>
+          <a href="../"><span className="logo-hat">HD</span><span className="logo-de">Wedding & Events</span></a>
         </div>
 
         <ul className="nav flex-column mb-4">
           {menuItems.map((item) => (
             <li
               key={item.id}
-              className={`nav-item mb-2 ${active === item.id ? "text-white rounded px-2 py-2" : "text-dark"}`}
+              className={`nav-item mb-3 ${active === item.id ? "text-white rounded px-2 py-2" : "text-dark"}`}
               style={active === item.id ? { backgroundColor: primaryColor } : { cursor: "pointer" }}
               onClick={() => setActive(item.id)}
             >
               <Link to={item.path} className="text-decoration-none text-reset d-flex align-items-center">
-                <span className="me-2 fs-5">{item.icon}</span>
-                <span className="fw-semibold">{item.label}</span>
+                <span className="me-3 fs-4">{item.icon}</span>
+                <span className="fw-semibold fs-5">{item.label}</span>
               </Link>
             </li>
           ))}
@@ -70,12 +70,11 @@ export const AdminSidebar = () => {
   const [active, setActive] = useState("dashboard");
 
   const menuItems = [
-    { id: "dashboard", label: "Dashboard", icon: <FaHome />, path: "/admin/dashboard" },
-    { id: "users", label: "Users", icon: <FaUsers />, path: "/admin/users" },
-    { id: "orders", label: "Bookings", icon: <FaClipboardList />, path: "/admin/bookings" },
-    { id: "reports", label: "Reports", icon: <FaChartBar />, path: "/admin/dashboard" },
-    { id: "settings", label: "Settings", icon: <FaCog />, path: "/admin/settings" },
-    { id: "admins", label: "Admins", icon: <FaUserShield />, path: "/admin/dashboard" },
+    { id: "dashboard", label: "Bảng điều khiển", icon: <FaHome />, path: "/admin/dashboard" },
+    { id: "users", label: "Người dùng", icon: <FaUsers />, path: "/admin/users" },
+    { id: "orders", label: "Đơn đặt hàng", icon: <FaClipboardList />, path: "/admin/bookings" },
+    { id: "reports", label: "Báo cáo", icon: <FaChartBar />, path: "/admin/dashboard" },
+    { id: "settings", label: "Cài đặtđặt", icon: <FaCog />, path: "/profile" }
   ];
 
   useEffect(() => {
