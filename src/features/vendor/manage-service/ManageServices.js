@@ -6,22 +6,25 @@ import ServiceCard from './ServiceCard';
 import { fetchServiceAPI } from './serviceAPI';
 import ModalAddService from './ModalAddService';
 import {FaPlus } from "react-icons/fa";
+import { useSelector } from 'react-redux';
 
 const ManageServices = () => {
     const [services, setServices] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [editingServiceId, setEditingServiceId] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
+    const user = useSelector((state) => state.auth.user);
 
     const fetchServices = async () => {
-        const response = await fetchServiceAPI();
+        if (!user) return;
+        const response = await fetchServiceAPI(user.id);
         const data = await response.data;
         setServices(data);
     };
 
     useEffect(() => {
         fetchServices();
-    }, []);
+    }, [user]);
 
     // Lọc dịch vụ theo tên
     const filteredServices = services.filter(service =>

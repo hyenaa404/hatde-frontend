@@ -25,6 +25,7 @@ import ViewBooking from '../features/vendor/manage-booking/BookingManage';
 import ManageServices from '../features/vendor/manage-service/ManageServices';
 import UserList from '../features/admin/manage-user/UserList';
 import PaymentReturn from '../features/booking/pages/PaymentReturn';
+import AboutPage from '../pages/landing/AboutPage';
 
 // export const router = createBrowserRouter([
 //   {
@@ -50,6 +51,7 @@ export const router = createBrowserRouter([
       { path: 'wedding', element: <WeddingServices /> },
       { path: 'wedding/category/:id', element: <WeddingServices /> },
       { path: 'accessory', element: <AccessoryServices /> },
+      { path: 'about', element: <AboutPage /> },
       { path: 'service-detail/:id', element: <ServiceDetail /> }
     ]
   },

@@ -25,6 +25,7 @@ export const LandingNavbar = () => {
         <a href="../">Trang chủ</a>
         <a href="../wedding">Dịch vụ</a>
         <a href="../accessory">Phụ kiện cưới</a>
+        <a href="../about">Giới thiệu</a>
       </nav>
 
       <div className="nav-button">
@@ -51,6 +52,7 @@ export const HomeNavbar = () => {
         <a href="../">Trang chủ</a>
         <a href="../wedding">Dịch vụ</a>
         <a href="../accessory">Phụ kiện cưới</a>
+        <a href="../about">Giới thiệu</a>
       </nav>
 
       <div className="nav-icons">
@@ -76,6 +78,7 @@ export const VendorDashboardNavbar = () => {
         <a href="../shop">Cửa hàng của tôi</a>
         <a href="../booking">Đơn hàng</a>
         <a href="../discount">Khuyến mại</a>
+        <a href="../about">Giới thiệu</a>
 
       </nav>
 
@@ -106,6 +109,7 @@ export const AdminDashboardNavbar = () => {
         <a href="../user">Cửa hàng của tôi</a>
         <a href="../booking">Đơn hàng</a>
         <a href="../discount">Khuyến mại</a>
+        <a href="../about">Giới thiệu</a>
 
       </nav>
 

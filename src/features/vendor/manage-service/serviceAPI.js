@@ -4,8 +4,8 @@ import axiosInstance from "../../../services/axiosInstance";
 
 
 
-export const fetchServiceAPI = () => {
-    return axiosInstance.get(`/Service`, {
+export const fetchServiceAPI = (vendorId) => {
+    return axiosInstance.get(`/Service/Vendor/${vendorId}`, {
         withCredentials: true,
     });
 }

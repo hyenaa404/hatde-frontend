@@ -1,7 +1,7 @@
 .footer {
     background-color: #111827;
     color: #9ca3af;
-    padding: 60px 40px;
+    padding: 16px 8px;
     font-family: sans-serif;
   }
 
@@ -62,7 +62,7 @@
   }
   .newsletter {
     max-width: 1200px;
-    margin: 60px auto 0;
+    margin: 16px auto 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -120,9 +120,9 @@
   
   .footer-bottom {
     max-width: 1200px;
-    margin: 50px auto 0;
+    margin: 12px auto 0;
     border-top: 1px solid #374151;
-    padding-top: 20px;
+    padding-top: 6px;
     display: flex;
     flex-direction: column;
     align-items: center;
