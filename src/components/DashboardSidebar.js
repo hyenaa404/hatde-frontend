@@ -15,7 +15,7 @@ const VendorSidebar = () => {
     { id: "users", label: "Dịch vụ", icon: <FaUsers />, path: "/vendor/services" },
     { id: "orders", label: "Đơn đặt hàng", icon: <FaClipboardList />, path: "/vendor/bookings" },
     { id: "reports", label: "Báo cáo", icon: <FaChartBar />, path: "/vendor/dashboard" },
-    { id: "settings", label: "Cài đặt", icon: <FaCog />, path: "/profile" },
+    { id: "settings", label: "Hồ sơ cá nhân", icon: <FaCog />, path: "/profile" },
   ];
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export const AdminSidebar = () => {
     { id: "users", label: "Người dùng", icon: <FaUsers />, path: "/admin/users" },
     { id: "orders", label: "Đơn đặt hàng", icon: <FaClipboardList />, path: "/admin/bookings" },
     { id: "reports", label: "Báo cáo", icon: <FaChartBar />, path: "/admin/dashboard" },
-    { id: "settings", label: "Cài đặtđặt", icon: <FaCog />, path: "/profile" }
+    { id: "settings", label: "Hồ sơ cá nhân", icon: <FaCog />, path: "/profile" }
   ];
 
   useEffect(() => {
