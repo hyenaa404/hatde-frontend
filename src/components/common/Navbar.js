@@ -24,7 +24,7 @@ export const LandingNavbar = () => {
       <nav className="nav-menu">
         <a href="../">Trang chủ</a>
         <a href="../wedding">Dịch vụ</a>
-        <a href="../accessory">Phụ kiện cưới</a>
+        <a href="../accessory">Hoa cưới</a>
         <a href="../about">Giới thiệu</a>
       </nav>
 
@@ -51,7 +51,7 @@ export const HomeNavbar = () => {
 
         <a href="../">Trang chủ</a>
         <a href="../wedding">Dịch vụ</a>
-        <a href="../accessory">Phụ kiện cưới</a>
+        <a href="../accessory">Hoa cưới</a>
         <a href="../about">Giới thiệu</a>
       </nav>
 

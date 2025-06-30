@@ -30,7 +30,7 @@ function AccessoryCard({ item }) {
               </div>
             </div>
 
-            <p className="location">Hà Nội</p>
+            <p className="location">{item.address}</p>
             <div className="rating">
               ⭐  4.8 (102 reviews)
             </div>
