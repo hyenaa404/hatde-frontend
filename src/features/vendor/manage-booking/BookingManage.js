@@ -1,23 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import Pagination from '../../../components/common/Pagination';
-import { changeBookingDetailStatus, fetchBookingDetail, fetchBookings } from '../../admin/manage-booking/bookingServices';
+import { changeBookingDetailStatus, fetchBookings } from '../../admin/manage-booking/bookingServices';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 export const ViewBooking = () => {
     const [selectedBooking, setSelectedBooking] = useState(null);
 
     const [selectedBookingDetail, setSelectedBookingDetail] = useState(null);
 
-
-    const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
     const [bookings, setBookings] = useState([]);
     const [fetchStatus, setFetchStatus] = useState(false);
     // const [sortedBookings, setSortedBookings] = useState([]);
 
 
-    const TABS = ['all', 'pending', 'confirmed', 'preparing', 'completed', 'cancelled'];
+    const TABS = [
+        { key: 'all', label: 'Tất cả' },
+        { key: 'pending', label: 'Chờ xác nhận' },
+        { key: 'confirmed', label: 'Đã xác nhận' },
+        { key: 'preparing', label: 'Đang chuẩn bị' },
+        { key: 'completed', label: 'Hoàn thành' },
+        { key: 'cancelled', label: 'Đã hủy' }
+    ];
 
     const [filteredBookings, setFilteredBookings] = useState([]);
     const [activeTab, setActiveTab] = useState('all');
@@ -63,7 +67,7 @@ export const ViewBooking = () => {
         if (user?.id) {
             fetchAndSort();
         }
-    }, []);
+    }, [user?.id]);
 
 
 
@@ -107,14 +111,14 @@ export const ViewBooking = () => {
             <div className="tabs">
                 {TABS.map(tab => (
                     <button
-                        key={tab}
-                        className={`tab-button ${activeTab === tab ? 'active' : ''}`}
+                        key={tab.key}
+                        className={`tab-button ${activeTab === tab.key ? 'active' : ''}`}
                         onClick={() => {
-                            setActiveTab(tab);
+                            setActiveTab(tab.key);
                             setCurrentPage(1);
                         }}
                     >
-                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                        {tab.label}
                     </button>
                 ))}
             </div>
@@ -156,7 +160,16 @@ export const ViewBooking = () => {
                                     <td>{booking.paymentMethod}</td>
                                     <td>
                                         <span className={`status-badge status-${booking.status}`}>
-                                            {booking.status}
+                                            {(() => {
+                                                switch (booking.status) {
+                                                    case 'pending': return 'Chờ xác nhận';
+                                                    case 'confirmed': return 'Đã xác nhận';
+                                                    case 'preparing': return 'Đang chuẩn bị';
+                                                    case 'completed': return 'Hoàn thành';
+                                                    case 'cancelled': return 'Đã hủy';
+                                                    default: return booking.status;
+                                                }
+                                            })()}
                                         </span>
                                     </td>
                                     <td>{booking.receiverName}</td>
@@ -167,13 +180,13 @@ export const ViewBooking = () => {
                                             (booking.bookingStatus == "approved") ? <select
                                                 value={booking.status}
                                                 onChange={(e) => handleStatusChange(booking.bookingDetailId, e.target.value)}
-                                                className={`btn border border-dark ${booking.status == "completed" ? "disabled" : ""}`}
+                                                className={`btn border border-dark ${booking.status === "completed" ? "disabled" : ""}`}
                                             >
-                                                <option value="pending">Pending</option>
-                                                <option value="confirmed">Confirmed</option>
-                                                <option value="preparing">Preparing</option>
-                                                <option value="completed">Completed</option>
-                                                <option value="cancelled">Cancelled</option>
+                                                <option value="pending">Chờ xác nhận</option>
+                                                <option value="confirmed">Đã xác nhận</option>
+                                                <option value="preparing">Đang chuẩn bị</option>
+                                                <option value="completed">Hoàn thành</option>
+                                                <option value="cancelled">Đã hủy</option>
                                             </select> : <span>Chưa phê duyệt</span>
                                         }
                                     </td>

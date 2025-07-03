@@ -3,7 +3,6 @@ import "../styles/booking-history.css"
 import Pagination from '../../../components/common/Pagination';
 import { fetchBookingsByUser } from '../bookingServices';
 import { useSelector } from 'react-redux';
-import { fetchBookings } from '../test-data';
 import { useNavigate } from 'react-router-dom';
 import { Space, Table, Tag } from 'antd';
 
@@ -67,7 +66,14 @@ const History = () => {
     // const [sortedBookings, setSortedBookings] = useState([]);
 
 
-    const TABS = ['all', 'pending', 'approved', 'prepare', 'completed', 'cancel'];
+    const TABS = [
+        { key: 'all', label: 'Tất cả' },
+        { key: 'pending', label: 'Chờ xác nhận' },
+        { key: 'approved', label: 'Đã xác nhận' },
+        { key: 'prepare', label: 'Đang chuẩn bị' },
+        { key: 'completed', label: 'Hoàn thành' },
+        { key: 'cancel', label: 'Đã hủy' }
+    ];
 
     const [filteredBookings, setFilteredBookings] = useState([]);
     const [activeTab, setActiveTab] = useState('all');
@@ -92,7 +98,7 @@ const History = () => {
         if (user?.id) {
             fetchAndSort();
         }
-    }, []);
+    }, [activeTab, user.id]);
 
 
     useEffect(() => {
@@ -133,14 +139,14 @@ const History = () => {
             <div className="tabs">
                 {TABS.map(tab => (
                     <button
-                        key={tab}
-                        className={`tab-button ${activeTab === tab ? 'active' : ''}`}
+                        key={tab.key}
+                        className={`tab-button ${activeTab === tab.key ? 'active' : ''}`}
                         onClick={() => {
-                            setActiveTab(tab);
+                            setActiveTab(tab.key);
                             setCurrentPage(1);
                         }}
                     >
-                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                        {tab.label}
                     </button>
                 ))}
             </div>
@@ -179,7 +185,16 @@ const History = () => {
                                     <td>{booking.paymentMethod}</td>
                                     <td>
                                         <span className={`status-badge status-${booking.status}`}>
-                                            {booking.status}
+                                            {(() => {
+                                                switch (booking.status) {
+                                                    case 'pending': return 'Chờ xác nhận';
+                                                    case 'approved': return 'Đã xác nhận';
+                                                    case 'prepare': return 'Đang chuẩn bị';
+                                                    case 'completed': return 'Hoàn thành';
+                                                    case 'cancel': return 'Đã hủy';
+                                                    default: return booking.status;
+                                                }
+                                            })()}
                                         </span>
                                     </td>
                                     <td>{Number(booking.totalPrice).toLocaleString()} VND</td>
@@ -240,7 +255,16 @@ const History = () => {
                                         </div>
                                     </div>
                                     <div className='order-information'>
-                                        <p><strong>Trạng thái:</strong> <span className={`status-badge status-${selectedBooking.status}`}>{selectedBooking.status}</span></p>
+                                        <p><strong>Trạng thái:</strong> <span className={`status-badge status-${selectedBooking.status}`}>{(() => {
+                                            switch (selectedBooking.status) {
+                                                case 'pending': return 'Chờ xác nhận';
+                                                case 'approved': return 'Đã xác nhận';
+                                                case 'prepare': return 'Đang chuẩn bị';
+                                                case 'completed': return 'Hoàn thành';
+                                                case 'cancel': return 'Đã hủy';
+                                                default: return selectedBooking.status;
+                                            }
+                                        })()}</span></p>
                                         <p><strong>Địa chỉ:</strong> {selectedBooking.user.address}</p>
                                         <p><strong>Ngày tổ chức:</strong> {new Date(selectedBooking.eventDate).toLocaleString()}</p>
                                         <p><strong>Ngày đặt:</strong> {new Date(selectedBooking.createdAt).toLocaleString()}</p>

@@ -3,7 +3,6 @@ import "../styles/booking-history.css"
 import Pagination from '../../../components/common/Pagination';
 import { fetchBookingsByUser } from '../bookingServices';
 import { useSelector } from 'react-redux';
-import { fetchBookings } from '../test-data';
 import { useNavigate } from 'react-router-dom';
 import { updateBookingAPI } from '../../admin/manage-booking/bookingAPI';
 
@@ -17,7 +16,14 @@ const BookingHistory = () => {
     // const [sortedBookings, setSortedBookings] = useState([]);
 
 
-    const TABS = ['all', 'pending', 'approved', 'prepare', 'completed', 'cancel'];
+    const TABS = [
+        { key: 'all', label: 'Tất cả' },
+        { key: 'pending', label: 'Chờ xác nhận' },
+        { key: 'approved', label: 'Đã xác nhận' },
+        { key: 'prepare', label: 'Đang chuẩn bị' },
+        { key: 'completed', label: 'Hoàn thành' },
+        { key: 'cancel', label: 'Đã hủy' }
+    ];
 
     const [filteredBookings, setFilteredBookings] = useState([]);
     const [activeTab, setActiveTab] = useState('all');
@@ -38,7 +44,7 @@ const BookingHistory = () => {
         if (user?.id) {
             fetchAndSort();
         }
-    }, []);
+    }, [user?.id]);
 
 
     useEffect(() => {
@@ -93,14 +99,14 @@ const BookingHistory = () => {
             <div className="tabs">
                 {TABS.map(tab => (
                     <button
-                        key={tab}
-                        className={`tab-button ${activeTab === tab ? 'active' : ''}`}
+                        key={tab.key}
+                        className={`tab-button ${activeTab === tab.key ? 'active' : ''}`}
                         onClick={() => {
-                            setActiveTab(tab);
+                            setActiveTab(tab.key);
                             setCurrentPage(1);
                         }}
                     >
-                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                        {tab.label}
                     </button>
                 ))}
             </div>
@@ -142,25 +148,34 @@ const BookingHistory = () => {
                                         {booking.paymentMethod === 'vnpay' && (
                                             <span className={`status-badge status-pending`}>
                                                 {booking.payments && booking.payments.length > 0
-                                                    ? booking.payments[booking.payments.length - 1].paymentStatus.toUpperCase()
-                                                    : "UNPAID"}
+                                                    ? (booking.payments[booking.payments.length - 1].paymentStatus.toLowerCase() === 'paid' ? 'Đã thanh toán' : 'Chưa thanh toán')
+                                                    : "Chưa thanh toán"}
                                             </span>
                                         )}
                                         {booking.paymentMethod === 'cash' && (
                                             <span className={`status-badge status-pending`}>
                                                 {booking.status === 'pending' || booking.status === 'cancel'
-                                                    ? 'UNPAID' : "PAID"}
+                                                    ? 'Chưa thanh toán' : "Đã thanh toán"}
                                             </span>
                                         )}
                                     </td>
                                     <td>
                                         <span className={`status-badge status-${booking.status}`}>
-                                            {booking.status}
+                                            {(() => {
+                                                switch (booking.status) {
+                                                    case 'pending': return 'Chờ xác nhận';
+                                                    case 'approved': return 'Đã xác nhận';
+                                                    case 'prepare': return 'Đang chuẩn bị';
+                                                    case 'completed': return 'Hoàn thành';
+                                                    case 'cancel': return 'Đã hủy';
+                                                    default: return booking.status;
+                                                }
+                                            })()}
                                         </span>
                                     </td>
                                     <td>{Number(booking.totalPrice).toLocaleString()} VND</td>
                                     <td>
-                                        {booking.status === 'approved' && booking.paymentMethod === 'vnpay' && booking.payments && (booking.payments.length == 0 || (booking.payments[booking.payments.length - 1].paymentStatus != "paid")) && (
+                                        {booking.status === 'approved' && booking.paymentMethod === 'vnpay' && booking.payments && (booking.payments.length === 0 || (booking.payments[booking.payments.length - 1].paymentStatus !== "paid")) && (
                                             <button
                                                 onClick={(e) => {
                                                     e.stopPropagation();
@@ -227,10 +242,21 @@ const BookingHistory = () => {
                                         </div>
                                     </div>
                                     <div className='order-information'>
-                                        <p><strong>Trạng thái đơn hàng:</strong> <span className={`status-badge status-${selectedBooking.status}`}>{selectedBooking.status}</span></p>
-                                        <p><strong>Trạng thái thanh toán:</strong> <span className={`status-badge status-pending`}>{selectedBooking.payments && selectedBooking.payments.length > 0
-                                            ? selectedBooking.payments[selectedBooking.payments.length - 1].paymentStatus
-                                            : "UNPAID"}</span></p>
+                                        <p><strong>Trạng thái đơn hàng:</strong> <span className={`status-badge status-${selectedBooking.status}`}>{(() => {
+                                            switch (selectedBooking.status) {
+                                                case 'pending': return 'Chờ xác nhận';
+                                                case 'approved': return 'Đã xác nhận';
+                                                case 'prepare': return 'Đang chuẩn bị';
+                                                case 'completed': return 'Hoàn thành';
+                                                case 'cancel': return 'Đã hủy';
+                                                default: return selectedBooking.status;
+                                            }
+                                        })()}</span></p>
+                                        <p><strong>Trạng thái thanh toán:</strong> <span className={`status-badge status-pending`}>
+                                            {selectedBooking.payments && selectedBooking.payments.length > 0
+                                                ? (selectedBooking.payments[selectedBooking.payments.length - 1].paymentStatus.toLowerCase() === 'paid' ? 'Đã thanh toán' : 'Chưa thanh toán')
+                                                : "Chưa thanh toán"}
+                                        </span></p>
                                         <p><strong>Địa chỉ:</strong> {selectedBooking.user.address}</p>
                                         <p><strong>Ngày tổ chức:</strong> {new Date(selectedBooking.eventDate).toLocaleString()}</p>
                                         <p><strong>Ngày đặt:</strong> {new Date(selectedBooking.createdAt).toLocaleString()}</p>

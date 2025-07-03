@@ -2,21 +2,25 @@ import React, { useEffect, useState } from 'react';
 import Pagination from '../../../components/common/Pagination';
 import { fetchBookings, updateBooking, fetchBookingDetail, fetchBookingsAdmin } from './bookingServices'
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 export const BookingManage = () => {
     // const [selectedBooking, setSelectedBooking] = useState(null);
     const [selectedBookingDetail, setSelectedBookingDetail] = useState(null);
 
-
-    const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
     const [bookings, setBookings] = useState([]);
     const [fetchStatus, setFetchStatus] = useState(false);
     // const [sortedBookings, setSortedBookings] = useState([]);
 
 
-    const TABS = ['all', 'pending', 'approved', 'preparing', 'completed', 'cancel'];
+    const TABS = [
+        { key: 'all', label: 'Tất cả' },
+        { key: 'pending', label: 'Chờ xác nhận' },
+        { key: 'approved', label: 'Đã xác nhận' },
+        { key: 'preparing', label: 'Đang chuẩn bị' },
+        { key: 'completed', label: 'Hoàn thành' },
+        { key: 'cancel', label: 'Đã hủy' }
+    ];
 
     const [filteredBookings, setFilteredBookings] = useState([]);
     const [activeTab, setActiveTab] = useState('all');
@@ -47,13 +51,10 @@ export const BookingManage = () => {
 
     };
     useEffect(() => {
-
-
-
         if (user?.id) {
             fetchAndSort();
         }
-    }, []);
+    }, [user?.id]);
 
 
     useEffect(() => {
@@ -91,26 +92,6 @@ export const BookingManage = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const currentItems = filteredBookings.slice(startIndex, startIndex + itemsPerPage);
 
-    const getNextAction = (status) => {
-        switch (status) {
-            case 'pending':
-                return { label: 'Approve', nextStatus: 'approved' };
-            case 'approved':
-                return { label: 'Prepare', nextStatus: 'prepare' };
-            case 'prepare':
-                return { label: 'Complete', nextStatus: 'completed' };
-            case 'preparing':
-                return { label: 'Complete', nextStatus: 'completed' };
-            case 'completed':
-                return null;
-            case 'cancel':
-                return null;
-            default:
-                return null;
-        }
-    };
-
-
     return (
         <div className="booking-history">
 
@@ -118,14 +99,14 @@ export const BookingManage = () => {
             <div className="tabs">
                 {TABS.map(tab => (
                     <button
-                        key={tab}
-                        className={`tab-button ${activeTab === tab ? 'active' : ''}`}
+                        key={tab.key}
+                        className={`tab-button ${activeTab === tab.key ? 'active' : ''}`}
                         onClick={() => {
-                            setActiveTab(tab);
+                            setActiveTab(tab.key);
                             setCurrentPage(1);
                         }}
                     >
-                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                        {tab.label}
                     </button>
                 ))}
             </div>
@@ -165,13 +146,22 @@ export const BookingManage = () => {
                                     <td>{booking.paymentMethod}</td>
                                     <td>
                                         <span className={`status-badge status-${booking.status}`}>
-                                            {booking.status}
+                                            {(() => {
+                                                switch (booking.status) {
+                                                    case 'pending': return 'Chờ xác nhận';
+                                                    case 'approved': return 'Đã xác nhận';
+                                                    case 'preparing': return 'Đang chuẩn bị';
+                                                    case 'completed': return 'Hoàn thành';
+                                                    case 'cancel': return 'Đã hủy';
+                                                    default: return booking.status;
+                                                }
+                                            })()}
                                         </span>
                                     </td>
                                     <td>{Number(booking.totalPrice).toLocaleString()} VND</td>
                                     <td>
                                         {(() => {
-                                            if (booking.status == 'pending') {
+                                            if (booking.status === 'pending') {
                                                 return (
                                                     <button
                                                         onClick={(e) => {
@@ -180,7 +170,7 @@ export const BookingManage = () => {
                                                         }}
                                                         className="pay-button"
                                                     >
-                                                        Approve
+                                                        Xác nhận
                                                     </button>
 
                                                 );
@@ -188,7 +178,7 @@ export const BookingManage = () => {
                                             return null;
                                         })()}
                                     </td>
-                                    <td>{booking.status && booking.status != 'cancel' && booking.status != "completed" && (
+                                    <td>{booking.status && booking.status !== 'cancel' && booking.status !== "completed" && (
                                         <button
                                             onClick={(e) => {
                                                 e.stopPropagation();
@@ -196,11 +186,9 @@ export const BookingManage = () => {
                                             }}
                                             className="cancel-button"
                                         >
-                                            Cancel
+                                            Hủy
                                         </button>
-                                    )}
-
-                                    </td>
+                                    )}</td>
                                 </tr>
                             ))}
                         </tbody>
