@@ -28,6 +28,7 @@ export const Sidebar = ({
     setSelectedPriceRanges([]);
     setProvinceFilter([]);
   };
+  const hiddenCategoryIds = [7];
 
   return (
     <aside className="sidebar">
@@ -51,14 +52,18 @@ export const Sidebar = ({
       <div className="filter-section">
         <h3>Loại dịch vụ</h3>
         <ul>
-          {categories.map((cat) => (
+        {categories
+          .filter((cat) => !hiddenCategoryIds.includes(cat.id)) // ẩn loại bị chỉ định
+          .map((cat) => (
             <li key={cat.id}>
               <input
                 type="checkbox"
                 checked={selectedCategories.includes(cat.id)}
                 onChange={() => {
                   if (selectedCategories.includes(cat.id)) {
-                    setSelectedCategories(selectedCategories.filter(id => id !== cat.id));
+                    setSelectedCategories(
+                      selectedCategories.filter((id) => id !== cat.id)
+                    );
                   } else {
                     setSelectedCategories([...selectedCategories, cat.id]);
                   }
@@ -67,7 +72,7 @@ export const Sidebar = ({
               {cat.title}
             </li>
           ))}
-        </ul>
+      </ul>
       </div>
 
       {/* === Filter Tỉnh thành === */}
